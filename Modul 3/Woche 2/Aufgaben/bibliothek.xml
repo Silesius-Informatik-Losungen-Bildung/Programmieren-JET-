@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBuch xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Buch>
+    <Titel>AAAA</Titel>
+    <Autor>BBBB</Autor>
+    <Id>1</Id>
+  </Buch>
+</ArrayOfBuch>
