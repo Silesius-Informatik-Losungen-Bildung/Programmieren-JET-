@@ -1,0 +1,151 @@
+﻿<Window x:Class="MyShopApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MyShopApp.MainWindow="clr-namespace:MyShopApp"
+        Title="Company Details" Height="700" Width="900">
+
+    <Window.Resources>
+        <!-- Converter für komplexe Typen -->
+        <MyShopApp.MainWindow:SupplierConverter x:Key="SupplierConverter"/>
+        <MyShopApp.MainWindow:OrderListConverter x:Key="OrderListConverter" />
+        <MyShopApp.MainWindow:CustomerCardConverter x:Key="CustomerCardConverter" />
+        <MyShopApp.MainWindow:OrderItemListConverter x:Key="OrderItemListConverter" />
+    </Window.Resources>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Firma">
+                <MenuItem Header="Stammdaten" Click="StammdatenClick" />
+            </MenuItem>
+            <MenuItem Header="Produkte">
+                <MenuItem Header="Liste" Click="ProdukteClick" />
+            </MenuItem>
+            <MenuItem Header="Kunden">
+                <MenuItem Header="Stammdaten" Click="KundenClick" />
+            </MenuItem>
+            <MenuItem Header="Bestellungen">
+                <MenuItem Header="Ansicht" Click="BestellungenClick" />
+            </MenuItem>
+        </Menu>
+
+        <StackPanel x:Name="pnlCompany" Visibility="Visible" Background="LightBlue" Width="900" >
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="Meine Firma" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <Label Content="Name:" />
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="Email:" />
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="Tel.:" />
+                    <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="PLZ:" />
+                    <TextBox Text="{Binding PostCode, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="Ort:" />
+                    <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="Straße:" />
+                    <TextBox Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="UID:" />
+                    <TextBox Text="{Binding Uid, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="Webseite:" />
+                    <TextBox Text="{Binding Website, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+                    <Label Content="Kontakt:" />
+                    <TextBox Text="{Binding Contact, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel x:Name="pnlProducts" Visibility="Collapsed" Background="LightGreen" Width="900"  >
+            <Grid Margin="10" Width="900" >
+                <!-- DataGrid für die Produkte -->
+                <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
+                    <!-- Spalten-Definitionen -->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding ProductId, UpdateSourceTrigger=PropertyChanged}" Width="50" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="200" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Preis" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="100" IsReadOnly="True" />
+                        <DataGridTemplateColumn Header="Lieferanten" Width="520" IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!-- Liste der Lieferanten als Text -->
+                                    <TextBlock Text="{Binding Suppliers, Converter={StaticResource SupplierConverter}}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel x:Name="pnlCustomers" Visibility="Collapsed" Background="LightCyan" Width="900" >
+            <Grid Margin="10">
+                <!-- DataGrid zur Anzeige der Kunden -->
+                <DataGrid x:Name="CustomerDataGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <!-- Einfache Eigenschaften -->
+                        <DataGridTextColumn Header="Id" Binding="{Binding CustomerId}" Width="50" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Vorname" Binding="{Binding Firstname}" Width="100" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Nachname" Binding="{Binding Lastname}" Width="100" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Telefon" Binding="{Binding Phone}" Width="100" IsReadOnly="True" />
+                        <DataGridTextColumn Header="PLZ" Binding="{Binding PostCode}" Width="70" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Stadt" Binding="{Binding City}" Width="100" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Straße" Binding="{Binding Street}" Width="150" IsReadOnly="True" />
+
+                        <!-- Komplexe Eigenschaften -->
+                        <DataGridTemplateColumn Header="Bestellungen" Width="150" IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Orders, Converter={StaticResource OrderListConverter}}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Kundenkarte" Width="150" IsReadOnly="True" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CustomerCard, Converter={StaticResource CustomerCardConverter}}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel x:Name="pnlOrders" Visibility="Collapsed" Background="LightGray" Width="900"  >
+            <Grid Margin="10">
+                <!-- DataGrid zur Anzeige der Bestellungen -->
+                <DataGrid x:Name="OrderDataGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <!-- OrderId und Timestamp als einfache Spalten -->
+                        <DataGridTextColumn Header="BestellId" Binding="{Binding OrderId}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Timestamp" Binding="{Binding Timestamp, StringFormat={}{0:dd.MM.yyyy HH:mm:ss}}" Width="200" IsReadOnly="True"/>
+
+                        <!-- OrderItems als komplexe Eigenschaft -->
+                        <DataGridTemplateColumn Header="Positionen" Width="570" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding OrderItems, Converter={StaticResource OrderItemListConverter}}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+    </DockPanel>
+</Window>
