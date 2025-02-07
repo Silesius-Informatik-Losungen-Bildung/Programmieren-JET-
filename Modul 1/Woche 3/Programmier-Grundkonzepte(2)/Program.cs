@@ -5,20 +5,23 @@
         static void Main(string[] args)
         {
 
-            //Switch.Klassisch();
-            //Switch.MitEnum();
-            //Switch.MitWhen();
-            //Switch.MitExpressions();
-            //Switch.MitTupeln();
+            Switch.Klassisch();
+            Switch.MitEnum();
+            Switch.MitWhen();
+            Switch.MitExpressions();
+            Switch.MitTupeln();
 
-            //Schleifen.For();
-            //Schleifen.While();
-            //Schleifen.DoWhile();
-            //Schleifen.UnednlichMitFor();
-            //Schleifen.UnednlichMitWhile();
-            //Schleifen.MitBreakBeenden();
-            //Schleifen.MitContinue();
+            Schleifen.For();
+            Schleifen.While();
+            Schleifen.DoWhile();
+            Schleifen.UnednlichMitFor();
+            Schleifen.UnednlichMitWhile();
+            Schleifen.MitBreakBeenden();
+            Schleifen.MitContinue();
             Schleifen.MitGoTo();
+
+            Enums.EnumBeispiel1();
+            Enums.EnumBeispiel2();
         }
     }
 }
