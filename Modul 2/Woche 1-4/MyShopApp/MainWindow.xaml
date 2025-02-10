@@ -5,10 +5,10 @@
 
     <Window.Resources>
         <!-- Converter für komplexe Typen -->
-        <MyShopApp.MainWindow:SupplierConverter x:Key="SupplierConverter"/>
-        <MyShopApp.MainWindow:OrderListConverter x:Key="OrderListConverter" />
-        <MyShopApp.MainWindow:CustomerCardConverter x:Key="CustomerCardConverter" />
-        <MyShopApp.MainWindow:OrderItemListConverter x:Key="OrderItemListConverter" />
+        <MyShopApp.Logic:SupplierConverter x:Key="SupplierConverter"/>
+        <MyShopApp.Logic:OrderListConverter x:Key="OrderListConverter" />
+        <MyShopApp.Logic:CustomerCardConverter x:Key="CustomerCardConverter" />
+        <MyShopApp.Logic:OrderItemListConverter x:Key="OrderItemListConverter" />
     </Window.Resources>
 
     <DockPanel>

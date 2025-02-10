@@ -1,6 +1,6 @@
 ﻿namespace MyShopApp.Models.Base
 {
-    public class CompanyUnit: BusinessUnit
+    public abstract class CompanyUnit: BusinessUnit
     {
         public required string Name { get; set; }
         public string? Uid { get; set; }

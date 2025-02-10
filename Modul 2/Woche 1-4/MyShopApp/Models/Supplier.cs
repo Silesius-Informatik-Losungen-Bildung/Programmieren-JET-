@@ -1,4 +1,4 @@
-﻿using MyShopApp;
+﻿using MyShopApp.Logic;
 using MyShopApp.Models.Base;
 
 namespace MyShop.Models

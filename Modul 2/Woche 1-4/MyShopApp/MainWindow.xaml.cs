@@ -1,4 +1,5 @@
 ﻿using MyShop.Models;
+using MyShopApp.Logic;
 using System.Windows;
 
 namespace MyShopApp
@@ -71,8 +72,11 @@ namespace MyShopApp
 
             // Produkte in Company einstellen
             // 1 Company kann mehrere Produkte haben (1:N - Beziehung, "eins zu viele")
-            company.AddProduct(product1);
-            company.AddProduct(product2);
+
+         
+
+            //company.AddProduct(product1);
+            //company.AddProduct(product2);
 
 
             // Kunde instanzieren
@@ -91,7 +95,9 @@ namespace MyShopApp
 
             // Kunde der Company hinzufügen
             // 1 Company kann mehrere Kunden haben (1:N - Beziehung, "eins zu viele")
-            company.AddCustomer(customer1);
+
+            var companyLogic = new CompanyLogic(company);
+            companyLogic.AddCustomer(customer1);
 
 
             // Bestellung instanzieren
@@ -117,7 +123,11 @@ namespace MyShopApp
 
             // Bestellung dem Kunden zuweisen
             // 1 Kunde kann viele Bestellgen tätigen (1:N - Beziehung, "eins zu viele") 
-            customer1.AddOrder(order1);
+
+            var customerLogic = new CustomerLogic(customer1);
+            customerLogic.AddOrder(order1);
+
+            //customer1.AddOrder(order1);
 
 
             // GUI - Aktionen:
