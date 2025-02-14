@@ -1,6 +1,7 @@
 ﻿using MyShop.Models;
 using MyShopApp.Logic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MyShopApp
 {
@@ -75,8 +76,7 @@ namespace MyShopApp
 
          
 
-            //company.AddProduct(product1);
-            //company.AddProduct(product2);
+
 
 
             // Kunde instanzieren
@@ -98,6 +98,8 @@ namespace MyShopApp
 
             var companyLogic = new CompanyLogic(company);
             companyLogic.AddCustomer(customer1);
+            companyLogic.AddProduct(product1);
+            companyLogic.AddProduct(product2);
 
 
             // Bestellung instanzieren
@@ -126,6 +128,9 @@ namespace MyShopApp
 
             var customerLogic = new CustomerLogic(customer1);
             customerLogic.AddOrder(order1);
+
+            var customerCardLogic = new CustomerCardLogic(customer1.CustomerCard);
+            customerCardLogic.AddPoints(order1.OrderItems.Count);
 
             //customer1.AddOrder(order1);
 

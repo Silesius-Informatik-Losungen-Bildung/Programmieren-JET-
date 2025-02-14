@@ -1,6 +1,6 @@
 ﻿<Window x:Class="MyShopApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MyShopApp.MainWindow="clr-namespace:MyShopApp"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:MyShopApp.MainWindow="clr-namespace:MyShopApp" xmlns:MyShopApp.Logic="clr-namespace:MyShopApp.Logic"
         Title="Company Details" Height="700" Width="900">
 
     <Window.Resources>
