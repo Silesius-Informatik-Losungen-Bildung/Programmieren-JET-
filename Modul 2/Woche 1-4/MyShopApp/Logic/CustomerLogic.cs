@@ -8,6 +8,7 @@ namespace MyShopApp.Logic
         public CustomerLogic(Customer customer)
         {
             _customer = customer;
+            customer.CustomerId = UniqueIntegerGenerator.GetNextUniqueInteger();
         }
 
         public void AddOrder(Order order)
