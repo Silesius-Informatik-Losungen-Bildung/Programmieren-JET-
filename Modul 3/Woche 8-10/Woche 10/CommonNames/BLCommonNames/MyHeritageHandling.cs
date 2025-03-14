@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ConfigCommonNames;
 using System.Text.RegularExpressions;
 using TypesCommonNames;
 using static TypesCommonNames.Enums;
@@ -10,12 +10,7 @@ namespace BLCommonNames
 
         static MyHeritageHandling()
         {
-            IConfiguration config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
-
-            KitNrPattern = config["KitNrPattern:MyHeritage"];
+            KitNrPattern = ClassBase.Config["KitNrPattern:MyHeritage"];
         }
 
         private static string KitNrPattern;

@@ -1,18 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System.Data;
+using ConfigCommonNames;
 namespace DLCommonNames
 {
     public class MiscData
     {
         static MiscData()
         {
-            IConfiguration config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
-
-            ConnectionString = config["ConnectionStrings:DefaultConnection"];
+            ConnectionString = ClassBase.Config["ConnectionStrings:DefaultConnection"];
         }
 
         private static string ConnectionString;

@@ -8,10 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConfigCommonNames\ConfigCommonNames.csproj" />
     <ProjectReference Include="..\TypesCommonNames\TypesCommonNames.csproj" />
   </ItemGroup>
 </Project>
