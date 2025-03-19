@@ -1,0 +1,28 @@
+﻿[
+  {
+    "SupplierId": 2,
+    "Products": null,
+    "Name": "Lieferant 1",
+    "Uid": null,
+    "Website": null,
+    "Contact": null,
+    "Email": "aaa@bbb.at",
+    "Phone": "32423423",
+    "PostCode": 1140,
+    "City": "Wien",
+    "Street": " Kendlerstr 34"
+  },
+  {
+    "SupplierId": 3,
+    "Products": null,
+    "Name": "Lieferant 2",
+    "Uid": null,
+    "Website": null,
+    "Contact": null,
+    "Email": "dsds@dsdsd.at",
+    "Phone": "65487789789",
+    "PostCode": 1140,
+    "City": "Wien",
+    "Street": " Kendlerstr 34"
+  }
+]

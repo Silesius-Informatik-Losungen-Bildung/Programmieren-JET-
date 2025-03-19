@@ -1,0 +1,17 @@
+﻿[
+  {
+    "CustomerId": 0,
+    "Firstname": "Maximilian",
+    "Lastname": "Mustermann",
+    "Orders": null,
+    "CustomerCard": {
+      "CustomerCardId": 6,
+      "Points": 0
+    },
+    "Email": "aaa@bbb.at",
+    "Phone": "000111111",
+    "PostCode": 1140,
+    "City": "Wien",
+    "Street": " Kendlerstr 34"
+  }
+]

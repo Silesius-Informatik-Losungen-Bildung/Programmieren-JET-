@@ -1,0 +1,14 @@
+﻿{
+  "CompanyId": 1,
+  "Products": null,
+  "Customers": null,
+  "Name": "Billa",
+  "Uid": "AT123456789",
+  "Website": "www.example.com",
+  "Contact": "Alexander",
+  "Email": "bill@billa.xy",
+  "Phone": "3432432432",
+  "PostCode": 1140,
+  "City": "Wien",
+  "Street": "Kendlerstr 34"
+}

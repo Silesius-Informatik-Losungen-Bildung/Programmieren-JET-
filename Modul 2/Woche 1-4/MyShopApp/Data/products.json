@@ -1,0 +1,12 @@
+﻿[
+  {
+    "ProductId": 5,
+    "Name": "Druckpapier premium",
+    "Price": 9.9
+  },
+  {
+    "ProductId": 4,
+    "Name": "Kugeschreiber gelb",
+    "Price": 1.20
+  }
+]
