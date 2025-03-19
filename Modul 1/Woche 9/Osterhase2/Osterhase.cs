@@ -4,7 +4,7 @@
     {
         // Eigenschaften
         public List<Ei> Eier { get; set; }
-        private Dictionary<int, string> Versteckorte { get; set; }
+        private List<string> Versteckorte { get; set; }
         public double Geschwindigkeit { get; set; }
         public int Energielevel { get; private set; }
         public bool IstMüde
@@ -15,7 +15,7 @@
             }
         }
 
-        public Osterhase(string name, string farbe, double gewichtInKg, Dictionary<int, string> versteckorte, int alter, List<Ei> eier):
+        public Osterhase(string name, string farbe, double gewichtInKg, List<string> versteckorte, int alter, List<Ei> eier):
             base(name, farbe, gewichtInKg, alter)
         {
             Versteckorte = versteckorte;
@@ -23,7 +23,7 @@
             Energielevel = 100; // startet voller Energie
         }
 
-        public void EierVerstecken(KeyValuePair<int, string> versteckort, int anzahlEierZumVerstecken)
+        public void EierVerstecken(string versteckort, int anzahlEierZumVerstecken)
         {
             Console.WriteLine("\n**** " + nameof(EierVerstecken) + " -Operation am " + versteckort + " mit " + anzahlEierZumVerstecken + " Ei(ern) beginnt");
 
@@ -35,7 +35,7 @@
 
             if (!Versteckorte.Contains(versteckort))
             {
-                Console.WriteLine("Fehler: Versteckort " + versteckort.Value + " gibt es nicht (mehr).\n");
+                Console.WriteLine("Fehler: Versteckort " + versteckort + " gibt es nicht (mehr).\n");
                 return;
             }
             if (anzahlEierZumVerstecken <= 0)
@@ -63,7 +63,7 @@
             }
 
             Energielevel = Energielevel - 20;
-            Versteckorte.Remove(versteckort.Key);
+            Versteckorte.Remove(versteckort);
         }
     }
 }
