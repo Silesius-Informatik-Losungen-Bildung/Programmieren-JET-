@@ -2,11 +2,13 @@
   {
     "ProductId": 5,
     "Name": "Druckpapier premium",
-    "Price": 9.9
+    "Price": 9.9,
+    "Suppliers": null
   },
   {
     "ProductId": 4,
     "Name": "Kugeschreiber gelb",
-    "Price": 1.20
+    "Price": 1.20,
+    "Suppliers": null
   }
 ]
