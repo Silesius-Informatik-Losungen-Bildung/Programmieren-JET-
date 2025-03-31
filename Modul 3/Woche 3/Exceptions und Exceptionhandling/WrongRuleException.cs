@@ -2,7 +2,7 @@
 {
     public class WrongRuleException : Exception
     {
-        public WrongRuleException(): base("Sie sind kein Admin und nicht berechtig diese Anwendung auszuführen!")
+        public WrongRuleException(): base("Sie sind kein Admin und nicht berechtigt diese Anwendung auszuführen!")
         {
         }
     }

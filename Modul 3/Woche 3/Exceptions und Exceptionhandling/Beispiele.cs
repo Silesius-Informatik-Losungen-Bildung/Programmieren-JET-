@@ -8,6 +8,8 @@
             try
             {
                 // Code, der eine Ausnahme auslösen könnte
+
+
                 Console.WriteLine("Try wurde ausgeführt");
             }
             catch (Exception ex)
@@ -26,7 +28,7 @@
         {
             try
             {
-                Console.WriteLine("Welchen Fehler wollen Sie provozieeren: Divison durch null (1), Array-Index (2), Falscher Pfad (3)");
+                Console.WriteLine("Welchen Fehler wollen Sie provozieren: Divison durch null (1), Array-Index (2), Falscher Pfad (3)");
                 int.TryParse(Console.ReadLine(), out var antwort);
 
                 switch (antwort)
@@ -121,7 +123,7 @@
                 if (antwort != "Admin")
                     throw new WrongRuleException();
 
-                Console.WriteLine("Willkomen " + antwort + "!");
+                Console.WriteLine("Willkommen " + antwort + "!");
             }
             catch (WrongRuleException ex)
             {
