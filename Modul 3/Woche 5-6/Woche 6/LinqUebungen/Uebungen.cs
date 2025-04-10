@@ -123,7 +123,7 @@
                 new()  { Id = 4, Name = "Krawietz" }
             };
 
-            Console.WriteLine("nachKundeMitGesamtBetrag");
+            Console.WriteLine("fuerJedeBesetllungDenKunden");
             var fuerJedeBesetllungDenKunden =
                 from bestellung in bestellungen
                 join kunde in kunden on bestellung.KundeId equals kunde.Id

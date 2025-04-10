@@ -131,10 +131,10 @@ namespace Einführung_Linq_to_Objects
             var person = new Person();
         }
 
-        class Person
+        public class Person
         {
-            public static string Name { get; set; }
-            public static int Alter { get; set; }
+            public string Name { get; set; }
+            public int Alter { get; set; }
         }
 
         // Anonyme Objekte
@@ -265,6 +265,53 @@ namespace Einführung_Linq_to_Objects
             int maxZahl = zahlen.Max();
 
             Console.WriteLine($"Max-Ergebnis: {maxZahl}"); // Ausgabe: 8
+        }
+
+        public static void Misc()
+        {
+            {
+                var namen = new List<string>() { "Anna", "Roman", "Tobias", "Matthias" };
+
+                //var erster = namen.First();
+
+                var erster = namen.FirstOrDefault();
+                Console.WriteLine(erster);
+
+
+                var sortiert = namen.Order();
+                foreach (var item in sortiert)
+                {
+                    Console.WriteLine(item);
+                }
+
+                namen.Reverse();
+                foreach (var item in namen)
+                {
+                    Console.WriteLine(item);
+                }
+
+                var any = namen.Any(name => name == "Lukas" || name == "Anna");
+                Console.WriteLine(any);
+
+                var personen = new List<Person> { new() { Alter = 45, Name = "Name1" }, new() { Age = 34, Name = "Name2" }, new() { Age = 34, Name = "Alex" } };
+
+                var jüngste = personen.Min(person => person.Alter);
+                Console.WriteLine(jüngste);
+
+                var durchnittalter = personen.Average(person => person.Alter);
+                Console.WriteLine(durchnittalter);
+
+                var summeAlter = personen.Sum(person => person.Alter);
+                Console.WriteLine(summeAlter);
+
+                var nameNameOrderByAge = personen
+                    .Where(person => person.Name.Contains("Name"))
+                    .OrderBy(personen => personen.Alter)
+                    .LastOrDefault();
+
+                Console.WriteLine(nameNameOrderByAge?.Name);
+            }
+
         }
     }
 }
