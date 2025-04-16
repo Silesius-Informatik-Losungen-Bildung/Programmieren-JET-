@@ -1,0 +1,8 @@
+OBJEKTE - MODELIERUNG in der OOP
+
+Tisch-Reservierungs-System
+---------------------------
+
+- Beamer mit DIAGRAMM einschalten
+- Neues Projekt TRS
+	--- Klassen Designen laut DIAGRAMM (Beziehungen (Properties mit *Id) werden später durch Klassen-Typen ersetzt

@@ -1,0 +1,145 @@
+Klar! Hier kommt ein einfaches Beispiel für ein Tisch-Reservierungssystem in C# **mit Vererbung**, ideal zum Einstieg.
+
+---
+
+## 🧠 Ziel:
+Ein System, bei dem es verschiedene **Reservierungstypen** gibt, z. B.:
+
+- Standardreservierung  
+- VIP-Reservierung (z. B. mit Begrüßungsgetränk)  
+- Familienreservierung (z. B. mit Hochstuhloption)
+
+Jede Reservierung hat gemeinsame Eigenschaften, aber auch spezielle.
+
+---
+
+## 🏗️ Klassendiagramm (vereinfacht):
+
+```
+Reservierung (Basisklasse)
+│
+├── StandardReservierung
+├── VIPReservierung
+└── FamilienReservierung
+```
+
+---
+
+## ✅ Code-Beispiel
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+public class Reservierung
+{
+    public string Name { get; set; }
+    public DateTime Uhrzeit { get; set; }
+    public int Personenanzahl { get; set; }
+
+    public Reservierung(string name, DateTime uhrzeit, int personenanzahl)
+    {
+        Name = name;
+        Uhrzeit = uhrzeit;
+        Personenanzahl = personenanzahl;
+    }
+
+    public virtual void Anzeigen()
+    {
+        Console.WriteLine($"Reservierung für {Name} um {Uhrzeit} für {Personenanzahl} Personen.");
+    }
+}
+```
+
+### 🔹 Standardreservierung:
+
+```csharp
+public class StandardReservierung : Reservierung
+{
+    public StandardReservierung(string name, DateTime uhrzeit, int personenanzahl)
+        : base(name, uhrzeit, personenanzahl)
+    {
+    }
+}
+```
+
+### 🔹 VIP-Reservierung:
+
+```csharp
+public class VIPReservierung : Reservierung
+{
+    public bool Begrüßungsgetränk { get; set; }
+
+    public VIPReservierung(string name, DateTime uhrzeit, int personenanzahl, bool begrüßungsgetränk)
+        : base(name, uhrzeit, personenanzahl)
+    {
+        Begrüßungsgetränk = begrüßungsgetränk;
+    }
+
+    public override void Anzeigen()
+    {
+        base.Anzeigen();
+        Console.WriteLine(Begrüßungsgetränk ? "Inkl. Begrüßungsgetränk." : "Kein Begrüßungsgetränk.");
+    }
+}
+```
+
+### 🔹 Familienreservierung:
+
+```csharp
+public class FamilienReservierung : Reservierung
+{
+    public bool HochstuhlBenötigt { get; set; }
+
+    public FamilienReservierung(string name, DateTime uhrzeit, int personenanzahl, bool hochstuhlBenötigt)
+        : base(name, uhrzeit, personenanzahl)
+    {
+        HochstuhlBenötigt = hochstuhlBenötigt;
+    }
+
+    public override void Anzeigen()
+    {
+        base.Anzeigen();
+        Console.WriteLine(HochstuhlBenötigt ? "Hochstuhl wird bereitgestellt." : "Kein Hochstuhl benötigt.");
+    }
+}
+```
+
+---
+
+## 🧪 Beispielverwendung:
+
+```csharp
+public class Program
+{
+    public static void Main()
+    {
+        List<Reservierung> reservierungen = new()
+        {
+            new StandardReservierung("Herr Müller", DateTime.Today.AddHours(18), 2),
+            new VIPReservierung("Frau Schmidt", DateTime.Today.AddHours(19), 4, true),
+            new FamilienReservierung("Familie Becker", DateTime.Today.AddHours(17), 5, true)
+        };
+
+        foreach (var r in reservierungen)
+        {
+            r.Anzeigen();
+            Console.WriteLine();
+        }
+    }
+}
+```
+
+---
+
+## 🔄 Erweiterungsmöglichkeiten:
+
+- Automatische Tischzuweisung
+- Stornierung
+- Kundenkontaktinformationen
+- JSON-Speicherung
+- REST-API (z. B. mit ASP.NET Core)
+
+---
+
+Möchtest du das Ganze z. B. als Konsolenanwendung mit Menü oder als Web-Anwendung? Oder soll ich es dir mit Datenbankanbindung (Entity Framework) erweitern?
