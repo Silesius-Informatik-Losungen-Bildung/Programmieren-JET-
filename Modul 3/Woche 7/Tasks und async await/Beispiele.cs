@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Runtime.Intrinsics.X86;
 
 namespace Tasks_und_async_await
 {
@@ -32,6 +31,8 @@ namespace Tasks_und_async_await
 
         public static Task<int> BerechneAsync()
         {
+            return BerechneAsync();
+
             Task<int> BerechneAsync()
             {
                 return Task.Run(() =>
@@ -40,7 +41,6 @@ namespace Tasks_und_async_await
                     return 42; // Gibt ein Ergebnis zurück
                 });
             }
-            return BerechneAsync();
         }
 
 
@@ -52,6 +52,7 @@ namespace Tasks_und_async_await
             Console.WriteLine("Start");
             await WarteAsync();
             Console.WriteLine("Ende");
+
             static async Task WarteAsync()
             {
                 Console.WriteLine("Warten beginnt");
