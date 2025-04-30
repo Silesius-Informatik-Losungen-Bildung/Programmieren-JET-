@@ -1,4 +1,0 @@
-- Zuerst Test von voriger Einheit: https://forms.gle/wKPVqUViXenwvJS56
-- Abstrakt und Versiegelt (wiederholt) erklären
-- Test dazu machen ( https://forms.gle/4KkA3n32rmdzLHg6A )
-- TRS weiter entwickeln
