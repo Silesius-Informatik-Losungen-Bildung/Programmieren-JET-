@@ -15,7 +15,7 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Zu welchem Typen soll ich jetzt .Content unboxen? " + ex.Message);
+                Console.WriteLine("Zu welchem Typ soll ich jetzt .Content unboxen? " + ex.Message);
             }
         }
 

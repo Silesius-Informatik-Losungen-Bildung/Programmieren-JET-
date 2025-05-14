@@ -1,6 +1,6 @@
 ﻿namespace GenerischeKlassenGenerischeMethoden
 {
-    public class Repository<T> where T : struct
+    public class Repository<T> where T : class
     {
         private List<T> items = new List<T>();
 
