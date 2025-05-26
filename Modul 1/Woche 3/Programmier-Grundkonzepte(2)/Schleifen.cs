@@ -96,5 +96,19 @@
 
         }
 
+        public static void Rekursiv()
+        {
+            const int geheimzahl = 7;
+            Console.WriteLine("Raten Sie die Zahl!");
+            int eingabe = int.Parse(Console.ReadLine());
+            if (eingabe != geheimzahl)
+            {
+                Console.WriteLine("Falsch!");
+                Rekursiv();
+                return;
+            }
+            Console.WriteLine("Richtig geraten!");
+        }
+
     }
 }

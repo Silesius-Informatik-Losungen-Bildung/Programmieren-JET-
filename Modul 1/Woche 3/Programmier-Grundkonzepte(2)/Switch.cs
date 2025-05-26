@@ -102,5 +102,36 @@
                 _ => 0
             };
         }
+
+        public static void Uebung1()
+        {
+            Console.Write("Geben Sie die Monatsnummer (1–12) ein: ");
+            int monat = int.Parse(Console.ReadLine());
+
+            switch (monat)
+            {
+                case 2:
+                    Console.WriteLine("28 Tage");
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    Console.WriteLine("30 Tage");
+                    break;
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    Console.WriteLine("31 Tage");
+                    break;
+                default:
+                    Console.WriteLine("Ungültiger Monat.");
+                    break;
+            }
+        }
     }
 }
