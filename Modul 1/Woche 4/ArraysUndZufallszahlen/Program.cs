@@ -4,9 +4,9 @@
     {
         static void Main()
         {
-            //Arrays.Uebung1();
+            Arrays.Uebung1();
             //Arrays.BeispielMatrix();
-            Arrays.CharMatrix();
+            //Arrays.CharMatrix();
             //Arrays.Dynamisch();
 
             //Zufallszahlen.BeispielMitRang();
