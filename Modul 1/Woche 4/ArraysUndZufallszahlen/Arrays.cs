@@ -94,5 +94,47 @@
 
             Console.WriteLine("Das Array hat nun " + ret.Length + " Stellen.");
         }
+
+        public static void UebungMitDynamischemArray()
+        {
+            int[] arr = [];
+            var multiplResult = 1;
+            var multiplResult2 = 1;
+            bool abgebrochen;
+
+            do
+            {
+                Console.WriteLine("Geben Sie eine Zahl ein.");
+                var strZahl = Console.ReadLine();
+                abgebrochen = (strZahl?.ToUpper() == "A");
+                if (abgebrochen)
+                    break;
+                if (!int.TryParse(strZahl, out int result))
+                {
+                    Console.WriteLine("Die Eingabe war falsch.");
+                    continue;
+                }
+                Array.Resize(ref arr, arr.Length + 1);
+                arr[arr.GetUpperBound(0)] = result;
+                multiplResult *= result;
+            }
+            while (!abgebrochen);
+            
+            if (arr.Length == 0)
+                return;
+
+            Console.WriteLine("Erg. 1: "+ multiplResult);
+
+
+            for(var i = 0; i < arr.Length; i++)
+            {
+                multiplResult2 *= arr[i];
+            }
+
+            Console.WriteLine("Erg. 2: " + multiplResult2);
+
+            var istGleich = (multiplResult == multiplResult2);
+            Console.WriteLine("Beide gleich? " + istGleich);           
+        }
     }
 }
