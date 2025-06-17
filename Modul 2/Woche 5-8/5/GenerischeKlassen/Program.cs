@@ -10,6 +10,10 @@
             GenerischeKlassen.MusterMitGenericsMitConstraints();
 
             GenerischeKlassen.GenericsUbung();
+
+            GenerischeKlassen.MehrereTypenParams();
+
+
         }
     }
 }

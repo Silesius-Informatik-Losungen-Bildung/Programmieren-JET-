@@ -1,4 +1,6 @@
-﻿namespace GenerischeKlassenGenerischeMethoden
+﻿using GenerischeKlassen;
+
+namespace GenerischeKlassenGenerischeMethoden
 {
     public static class GenerischeKlassen
     {
@@ -44,6 +46,37 @@
             geldboerserl.WaehrungHinzufuegen(new Waehrung { Name = "EUR", Betrag= 120 });
             geldboerserl.WaehrungHinzufuegen(new Waehrung { Name = "USD", Betrag = 12 });
             Console.WriteLine(geldboerserl.WaehrungenAnzahl());
+        }
+
+        public static void MehrereTypenParams()
+        {
+            // Ein LagerEintrag für ein string-Produkt, eine Kategorie als string und Menge als int
+            var eintrag1 = new LagerEintrag<string, string, int>(
+                "Tastatur",
+                "Elektronik",
+                15
+            );
+
+            eintrag1.ZeigeEintrag();
+
+            if (eintrag1.IstNiedrig(20))
+            {
+                Console.WriteLine("Warnung: Geringer Lagerbestand!");
+            }
+
+            Console.WriteLine();
+
+            // Ein Eintrag mit benutzerdefinierten Typen
+            var produkt = new Produkt { Name = "Buch", Preis = 9.99 };
+            var kategorie = new Kategorie { Bezeichnung = "Literatur" };
+
+            var eintrag2 = new LagerEintrag<Produkt, Kategorie, double>(
+                produkt,
+                kategorie,
+                4.5
+            );
+
+            eintrag2.ZeigeEintrag();
         }
 
         private class Box
