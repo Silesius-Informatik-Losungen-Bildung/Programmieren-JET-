@@ -28,6 +28,9 @@
         public bool IstNiedrig(TMenge grenzwert)
         {
             // nach grenzwert sortieren
+            //  < 0 : Menge ist kleiner als grenzwert
+            // 0 : Menge ist gleich grenzwert
+            // > 0 : Menge ist größer als grenzwert
             return Menge.CompareTo(grenzwert) < 0;
         }
 

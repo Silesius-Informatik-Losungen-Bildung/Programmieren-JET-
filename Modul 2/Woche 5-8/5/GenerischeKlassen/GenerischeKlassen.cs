@@ -77,6 +77,12 @@ namespace GenerischeKlassenGenerischeMethoden
             );
 
             eintrag2.ZeigeEintrag();
+
+            if (eintrag2.IstNiedrig(20))
+            {
+                Console.WriteLine("Warnung: Geringer Lagerbestand!");
+            }
+
         }
 
         private class Box
