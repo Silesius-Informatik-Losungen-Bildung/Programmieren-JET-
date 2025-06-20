@@ -6,15 +6,17 @@
         private int _kmStand;
         private string _fahrgestellnummer;
 
-        public Auto(string markeModell)
+        public Auto(string markeModell, int kmStand, string fahrgestellnummer)
         {
             _markeModell = markeModell;
+            _kmStand = kmStand;
+            _fahrgestellnummer = fahrgestellnummer;
         }
 
-        public Auto(int dd)
-        {
-            _kmStand = dd;
-        }
+        //public Auto(int kmStand)
+        //{
+        //    _kmStand = kmStand;
+        //}
 
 
         // Leerer Konstruktor
@@ -44,6 +46,7 @@
         // Property mit Standard-Wert
         public byte TuereAnzahl { get; set; } = 5;
 
+        // Property mit Setter und Getter
         public string MarkeModell
         {
             get { return _markeModell; }
@@ -79,23 +82,24 @@
         // Methode (Verhalten)
         public void Fahren()
         {
-            // LOgik, Auto in Begung zu setze
+            // Logik, um Auto in Bewegung zu setzen...
             Console.WriteLine("Auto fährt");
         }
 
         // Methode (Verhalten)
         public void Huppen()
         {
-
+            Console.Beep(600, 1000);
+            Console.Beep(600, 1000);
         }
 
         // Methode (Verhalten)
         public void Bremsen()
         {
-
+            // Logik, um Auto zu bremsen...
         }
 
-        // Destruktor für den Notfall
+        // Destruktor für Extra-Bedarf (z.B. Ressourcen-Bereiniugung
         ~Auto()
         {
             
