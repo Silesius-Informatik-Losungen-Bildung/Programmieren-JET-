@@ -2,16 +2,27 @@
 {
     public sealed class Auto : Fahrzeug
     {
+        private int _ps;
+
         public Auto(string markeModell, int bauJahr) : base(markeModell, bauJahr, true)
         {
             if (bauJahr <= 1885)
                 throw new Exception("Ungültiges Baujahr");
+
+            _ps = 100;
         }
 
-        public int Ps { get; set; }
+        public int Ps
+        {
+            get { return _ps; }
+            private set { _ps = value; }
+        }
+
         public int Reifen { get; set; }
         public int Sizplätze { get; set; }
         public decimal Anbotspreis { get; set; }
         public string Antriebsart { get; set; }
+
+
     }
 }

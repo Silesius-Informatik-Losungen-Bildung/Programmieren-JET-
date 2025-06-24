@@ -4,12 +4,12 @@
     {
         static void Main(string[] args)
         {
-            //var person = new Person() { Name = "Müller" };
-            //ChangePersonNameToHuber(person);
-            //Console.WriteLine(person.Name);
+            var person = new Person() { Name = "Müller" };
+            ChangePersonNameToHuber(person);
+            Console.WriteLine(person.Name);
 
-            //ChangePersonNameToHuber(person);
-            //Console.WriteLine(person.Name);
+            ChangePersonNameToHuber(person);
+            Console.WriteLine(person.Name);
 
 
             //int zahl = 1;

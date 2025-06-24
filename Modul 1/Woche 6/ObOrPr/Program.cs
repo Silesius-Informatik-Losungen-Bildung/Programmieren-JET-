@@ -14,6 +14,8 @@
             // auto1.Baujahr = 2025;
             auto1.Geschwindigkeit = 300;
             auto1.Fahren();
+
+           
             Console.WriteLine(auto1.IstZweispurig);
 
             Auto auto2 = new Auto("Suzuki Swift", 1999);
@@ -22,10 +24,12 @@
             auto1.Farbe = new Farbe() { IsMetalic = false, Color = System.Drawing.Color.Black };
             auto2.Antriebsart = "Allrad";
             
+
             // auto2.Baujahr = 2012;
 
             auto2.Geschwindigkeit = 150;
             auto2.Fahren();
+
 
             //// Prozedurale Programmierung (Ablauflogik statt Objekte)
             //// Auto1: Vor der Einführung von Objektorientierung
