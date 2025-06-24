@@ -5,46 +5,16 @@
         static void Main(string[] args)
         {
             var person = new Person() { Name = "Müller" };
+            ChangePersonNameToHuber(person);
             Console.WriteLine(person.Name);
-            Methode1(person);
+
+            ChangePersonNameToHuber(person);
             Console.WriteLine(person.Name);
 
 
-            var person2 = new Person() { Name = "Müller" };
-            Console.WriteLine(person2.Name);
-            var p = Mertode2(person2);
-            Console.WriteLine(p.Name);
-
-
-            var p3 = new Person();
-            person = person2;
-            p3 = person2;
-
-            person2.Name = "ddd";
-
-            person.Name = "YYYY";
-
-            p3.Name = "ZZZ";
-
-
-
-
-
-            int zahl = 1;
-            Console.WriteLine(zahl);
-            Methode3(zahl);
-            Console.WriteLine(zahl);
-
-            int a = 1;
-            int b = 2;
-            b = a;
-            b = 3;
-
-
-            Person p1 = new Person() { Name = "Alex" };
-            Person p2 = new Person() { Name = "Max" };
-            p2 = p1;
-            p2.Name = "Alois";
+            //int zahl = 1;
+            //ChangeZahl(ref zahl);
+            //Console.WriteLine(zahl);
 
             //int zahl = 45;
 
@@ -58,14 +28,7 @@
             //var str3 = Beispiele.MacheKommaseparierteZeichenkette("Fluss", "Meer", "Fische");
 
 
-            // Beispiele.Fakultät(10);
-        }
-
-
-
-        public static void Methode3(int z)
-        {
-            z = z + 1;
+            Beispiele.Fakultät(10);
         }
 
 
@@ -75,18 +38,19 @@
         }
 
 
-        public static void Methode1(Person p)
+        public static void ChangePersonNameToHuber2(Person p)
         {
-            const string name = "Nowack";
+            const string name = "Huber";
             p.Name = name;
         }
 
-        public static Person Mertode2(Person person)
+        public static Person ChangePersonNameToHuber(Person person)
         {
-            const string name = "Nowack";
-            var p = new Person() { Name = name };
-            return p;
+            const string name = "Huber";
+            person.Name = name;
+            return person;
         }
+
 
 
         public class Person()
