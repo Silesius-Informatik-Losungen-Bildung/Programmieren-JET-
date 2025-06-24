@@ -23,6 +23,12 @@
         public decimal Anbotspreis { get; set; }
         public string Antriebsart { get; set; }
 
+        public void Huppen()
+        {
+            Console.Beep(600, 1000);
+            Console.Beep(600, 1000);
+        }
+
 
     }
 }

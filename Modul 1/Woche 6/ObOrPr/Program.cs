@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
 
-            Auto auto1 = new Auto("Opel Corsa", 1700);
+            Auto auto1 = new Auto("Opel Corsa", 2000);
             auto1.Anbotspreis = 15000;
             //auto1.Baujahr = 1700;
             // auto1.MarkeModell = "Opel Corsa";
@@ -14,7 +14,7 @@
             // auto1.Baujahr = 2025;
             auto1.Geschwindigkeit = 300;
             auto1.Fahren();
-
+            auto1.Huppen();
            
             Console.WriteLine(auto1.IstZweispurig);
 
@@ -23,7 +23,7 @@
             // auto2.MarkeModell = "Suzuki Swift";
             auto1.Farbe = new Farbe() { IsMetalic = false, Color = System.Drawing.Color.Black };
             auto2.Antriebsart = "Allrad";
-            
+            auto2.Huppen();
 
             // auto2.Baujahr = 2012;
 
