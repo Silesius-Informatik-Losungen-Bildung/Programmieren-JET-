@@ -1,19 +1,20 @@
-﻿using System;
+﻿using M3_W1_Arbeiten_mit_nullable_Types;
+using System;
 
-// Experiment 1
+//// Experiment 1
 
-//string frage = "ist das Wetter jetzt schön?";
-//bool wetterIstSchön = default;
+//string frage = "ist das Wetter heute schön?";
+//var wetter = new Wetter();
 
 //Console.WriteLine(frage);
 //var antwort = Console.ReadLine();
 
 //if (antwort == "ja")
-//    wetterIstSchön = true;
+//    wetter.wetterIstSchön = true;
 //else if (antwort == "nein")
-//    wetterIstSchön = false;
+//    wetter.wetterIstSchön = false;
 
-//Console.WriteLine(wetterIstSchön);
+//Console.WriteLine(wetter.wetterIstSchön);
 
 
 //// Experiment 2
@@ -95,22 +96,31 @@
 //}
 
 
-//// --------------------------------------------------------------------------------------------------
-//// Null Conditional Operator (?.) Bsp
-//Person? person = null;
-////lange Syntax
-////if (person != null)
-////    Console.WriteLine(person.Name);
-////else Console.WriteLine("Person ist nicht instanziert, kein Zugriff auf .Name");
+// --------------------------------------------------------------------------------------------------
+// Null Conditional Operator (?.) Bsp
+Person? person = null;
 
-//// kurze Syntax
-//Console.WriteLine(person?.Name);
 
-//class Person
-//{
-//    public required string Name { get; set; }
-//    public required int Alter { get; set; }
-//}
+//lange Syntax
+//if (person != null)
+//    Console.WriteLine(person.Name);
+//else Console.WriteLine("Person ist nicht instanziert, kein Zugriff auf .Name");
+
+////kurze Syntax
+Console.WriteLine(person?.Name);
+Console.WriteLine(person?.Alter);
+Console.WriteLine(person?.GetXy());
+
+class Person
+{
+    public required string Name { get; set; }
+    public required int Alter { get; set; }
+
+    public int GetXy()
+    {
+        return 4;
+    }
+}
 
 
 //// --------------------------------------------------------------------------------------------------
@@ -125,12 +135,14 @@
 //    Console.WriteLine("Zahl ist null");
 
 
-//// Nullable Reference Types -> Reference Types ohne nachgestelltem "?" (nicht als nullable markiert)
-//// sollten bei aktieviertem <Nullable>enable</Nullable>) nicht mit null gesetzt sein
+// Nullable Reference Types -> Reference Types ohne nachgestelltem "?" (nicht als nullable markiert)
+// sollten bei aktieviertem <Nullable>enable</Nullable>) nicht mit null gesetzt sein
 
-string? name1 = null; // Gültig
-// Verweistypen, die nicht als nullable (nullfähig) markiert sind, sind automatisch "null-unfähig"
-string name2 = null;  // Compiler-Warnung, wenn #nullable aktiviert ist
+
+//string? name1 = null; // Gültig
+//// Verweistypen, die nicht als nullable (nullfähig) markiert sind, sind automatisch "null-unfähig"
+
+//string name2 = null;  // Compiler-Warnung, wenn #nullable aktiviert ist
 
 
 //// --------------------------------------------------------------------------------------------------
