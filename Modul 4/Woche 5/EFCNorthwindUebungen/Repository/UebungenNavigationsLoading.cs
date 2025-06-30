@@ -88,7 +88,7 @@ namespace EFCNorthwindUebungen.Repository
                 // Lazy Loading: wird verbundene Entität bei Zugriff nachgeladen.
                 var orders = context.Orders.OrderBy(o => o.OrderId)
                     .Take(5).ToList();
-                Console.WriteLine(orders[0].Customer.ContactName);
+                Console.WriteLine(orders[0]?.Customer?.ContactName);
             }
         }
 
@@ -109,7 +109,7 @@ namespace EFCNorthwindUebungen.Repository
                          .Reference(o => o.Customer)
                          .Load();
 
-                        Console.WriteLine(order.Customer.ContactName);
+                        Console.WriteLine(order?.Customer?.ContactName);
                     }
                 }
             }
@@ -128,7 +128,6 @@ namespace EFCNorthwindUebungen.Repository
                 {
                     Console.WriteLine($"Kunde: {kunde.CompanyName} ({kunde.Orders.Count} Bestellungen)");
                 }
-
             }
         }
 
@@ -145,7 +144,15 @@ namespace EFCNorthwindUebungen.Repository
 
                 foreach (var bestellung in bestellungen)
                 {
-                    Console.WriteLine($"Bestellung {bestellung.OrderId} von {bestellung.Customer.CompanyName}");
+                    Console.WriteLine($"Bestellung {bestellung.OrderId} von {bestellung?.Customer?.CompanyName}");
+
+                    if (bestellung == null)
+                        continue;
+                    foreach (var od in bestellung.OrderDetails)
+                    {
+                        Console.WriteLine($"Produkt {od.Product.ProductName}");
+                    }
+                   
                 }
             }
         }

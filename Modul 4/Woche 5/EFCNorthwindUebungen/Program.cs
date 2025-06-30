@@ -9,7 +9,7 @@ namespace EFCNorthwindUebungen
         {     
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            RunUebungenBasic();
+            //RunUebungenBasic();
             RunUebungenUebungenNavigationsLoading();
         }
 
