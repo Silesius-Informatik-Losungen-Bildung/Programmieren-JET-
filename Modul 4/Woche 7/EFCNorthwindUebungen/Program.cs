@@ -12,10 +12,9 @@ namespace EFCNorthwindUebungen
             // RunUebungenBasic();
             // RunUebungenUebungenNavigationsLoading();
 
-            // UebungenChangeTracking.ddd();
-            //UebungenChangeTracking.TrackingStatusse();
-
+            UebungenChangeTracking.TrackingStatusse();
             UebungenChangeTracking.SpeicherVersuchMitundOhneTracking();
+            UebungenChangeTracking.Uebung1();
         }
 
         static void RunUebungenUebungenNavigationsLoading()

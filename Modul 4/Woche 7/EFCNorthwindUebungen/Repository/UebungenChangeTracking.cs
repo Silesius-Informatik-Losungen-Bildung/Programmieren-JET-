@@ -7,12 +7,14 @@ namespace EFCNorthwindUebungen.Repository
     internal class UebungenChangeTracking
     {
         static EfcnorthwindContext? context;
+
         public static void TrackingStatusse()
         {
             using (context = new EfcnorthwindContext())
             {
                 var category = context.Categories
                     .FirstOrDefault(c => c.CategoryName == "Beverages");
+
                 var product = new Product
                 {
                     ProductName = "Testprodukt",
@@ -39,7 +41,6 @@ namespace EFCNorthwindUebungen.Repository
                 {
                     var entry = context.Entry(produkt);
                     Console.WriteLine($"Status von Product: {entry.State}");
-
                 }
             }
         }
@@ -73,7 +74,7 @@ namespace EFCNorthwindUebungen.Repository
             context.SaveChanges();
 
             //----------------------------------------------
-  
+
             // Produkt MIT Tracking aus DB holen
             var produktTracked = context.Products
                  .FirstOrDefault(p => p.ProductName == name1);
@@ -97,6 +98,84 @@ namespace EFCNorthwindUebungen.Repository
             context.Products.Remove(p1);
             context.Products.Remove(p2);
             context.SaveChanges();
+        }
+
+        public static void Uebung1()
+        {
+
+            using var context = new EfcnorthwindContext();
+
+            // 1.	Laden Sie einen Kunden Ihrer Wahl mit der CustomerID aus der Datenbank.
+            var kunde = context.Customers.FirstOrDefault(c => c.CustomerId == "ALFKI");
+
+            if (kunde != null)
+            {
+                Console.WriteLine($"Ursprünglicher ContactName: {kunde.ContactName}");
+
+                // 2.Ändern Sie lokal das Feld ContactName.
+                kunde.ContactName = "Neuer Kontaktname";
+
+                // 3.Nutzen Sie den Change Tracker, um den alten und den neuen Wert auszugeben.
+                var eintrag = context.Entry(kunde);
+                var original = eintrag.OriginalValues["ContactName"];
+                var aktuell = eintrag.CurrentValues["ContactName"];
+
+                Console.WriteLine($"Original: {original}, Aktuell: {aktuell}");
+
+                // 4. Verwenden Sie KEIN SaveChanges().
+
+                // 5.Setzen Sie die Änderung zurück (Revert durch SetValues).
+                eintrag.CurrentValues.SetValues(eintrag.OriginalValues);
+
+                // 6.	Geben Sie nach dem Revert den ContactName erneut aus.
+                Console.WriteLine($"Nach Revert: {kunde.ContactName}");
+            }
+            else
+            {
+                Console.WriteLine("Kunde nicht gefunden.");
+            }
+        }
+
+        public static void Uebung2()
+        {
+            using var context = new EfcnorthwindContext();
+
+            // 1. Produkt laden
+            var produkt = context.Products.FirstOrDefault(p => p.ProductId == 1);
+
+            if (produkt != null)
+            {
+                Console.WriteLine($"Originaler Produktname: {produkt.ProductName}, Preis: {produkt.UnitPrice}");
+
+                // 2. Lokale Änderungen
+                produkt.ProductName = "Testprodukt";
+                produkt.UnitPrice = 99.99m;
+
+                // 3. Change Tracker anzeigen
+                var eintrag = context.Entry(produkt);
+
+                var originalName = eintrag.OriginalValues["ProductName"];
+                var aktuellerName = eintrag.CurrentValues["ProductName"];
+
+                var originalPreis = eintrag.OriginalValues["UnitPrice"];
+                var aktuellerPreis = eintrag.CurrentValues["UnitPrice"];
+
+                Console.WriteLine($"Name – Original: {originalName}, Aktuell: {aktuellerName}");
+                Console.WriteLine($"Preis – Original: {originalPreis}, Aktuell: {aktuellerPreis}");
+
+                // 4. Kein SaveChanges!
+
+                // 5. Änderungen zurücksetzen
+                eintrag.CurrentValues.SetValues(eintrag.OriginalValues);
+
+                // 6. Kontrolle nach Revert
+                Console.WriteLine($"Nach Revert – Produktname: {produkt.ProductName}, Preis: {produkt.UnitPrice}");
+            }
+            else
+            {
+                Console.WriteLine("Produkt nicht gefunden.");
+            }
+
         }
 
     }

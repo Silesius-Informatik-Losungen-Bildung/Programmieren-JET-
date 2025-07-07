@@ -180,8 +180,7 @@ namespace EFCNorthwindUebungen.Repository
             {
                 var kategorien = context.Categories
                     .Include(c => c.Products)
-                    .Where(c => c.Products.Count >= 5)
-                    .ToList();
+                    .Where(c => c.Products.Count >= 5).ToList();
 
                 foreach (var kategorie in kategorien)
                 {

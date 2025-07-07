@@ -16,18 +16,18 @@ namespace EFCNorthwindUebungen
         static void RunUebungenUebungenNavigationsLoading()
         {
             //Teil 1
-            UebungenNavigationsLoading.CustomerOhneLoading();
-            UebungenNavigationsLoading.CustomerPerEagerLoading();
-            UebungenNavigationsLoading.CustomerUndOrderDetailsPerEagerLoading();
-            UebungenNavigationsLoading.CustomerUndOrderDetailsPerEagerLoadingAlsSqlCode();
-            UebungenNavigationsLoading.CustomerPerLazyLoading();
-            UebungenNavigationsLoading.CustomerPerExplicitLoading();
+            //UebungenNavigationsLoading.CustomerOhneLoading();
+            //UebungenNavigationsLoading.CustomerPerEagerLoading();
+            //UebungenNavigationsLoading.CustomerUndOrderDetailsPerEagerLoading();
+            //UebungenNavigationsLoading.CustomerUndOrderDetailsPerEagerLoadingAlsSqlCode();
+            //UebungenNavigationsLoading.CustomerPerLazyLoading();
+            //UebungenNavigationsLoading.CustomerPerExplicitLoading();
 
-            // Teil 2
-            UebungenNavigationsLoading.MehrAls10Bestellungen();
-            UebungenNavigationsLoading.BestellungeAus1997();
-            UebungenNavigationsLoading.BestellungeAus1997();
-            UebungenNavigationsLoading.PreisUeber50Eur();
+            //// Teil 2
+            //UebungenNavigationsLoading.MehrAls10Bestellungen();
+            //UebungenNavigationsLoading.BestellungeAus1997();
+            //UebungenNavigationsLoading.BestellungeAus1997();
+            //UebungenNavigationsLoading.PreisUeber50Eur();
             UebungenNavigationsLoading.KategorienMitMindestens5Produkten();
         }
 
