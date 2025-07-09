@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+
+
 class Program
 {
     static void Main(string[] args)
@@ -33,5 +35,5 @@ class Program
 //Console.WriteLine("Nach return: " + str);
 
 
-//// Global Usings Test
+// Global Usings Test
 //var colorAqua = Color.Aqua;
