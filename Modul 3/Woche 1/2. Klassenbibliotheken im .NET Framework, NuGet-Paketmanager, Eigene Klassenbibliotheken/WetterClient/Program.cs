@@ -10,14 +10,13 @@ namespace WetterClient
             Console.Write("Bitte geben Sie eine Stadt ein: ");
             string stadt = Console.ReadLine();
 
-            string apiKey = "344811d19e757efd1d8862693642f8dd";
-            string url = $"https://api.openweathermap.org/data/2.5/weather?q={stadt}&appid={apiKey}&units=metric&lang=de";
+
 
             using HttpClient client = new();
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(url);
+                HttpResponseMessage response = await client.GetAsync("url");
                 response.EnsureSuccessStatusCode();
 
                 string json = await response.Content.ReadAsStringAsync();
