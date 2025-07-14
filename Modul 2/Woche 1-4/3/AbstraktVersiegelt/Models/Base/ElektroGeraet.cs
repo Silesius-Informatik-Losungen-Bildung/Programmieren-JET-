@@ -1,11 +1,24 @@
 ﻿namespace AbstraktVersiegeltPolymorph.Models.Base
 {
-    internal abstract class ElektroGeraet
+    public abstract class ElektroGeraet
     {
-        internal string Marke { get; set; }
-        internal string Modell { get; set; }
+        public ElektroGeraet(string marke, string modell, int leistungInWatt)
+        {
+            Marke = marke;
+            Modell = modell;
+            LeistungInWatt = leistungInWatt;
+        }
+
+        public string Marke { get; set; }
+        public string Modell { get; set; }
         public int LeistungInWatt { get; set; }
+
         public abstract string MessageBeimHochfahren();
         public abstract void FunktionAusfuehren();
+
+        public virtual void MessageBeimHerunterfahren()
+        {
+            Console.WriteLine($"Gerät  {Marke} {Modell} wird heruntergefahren");
+        }
     }
 }

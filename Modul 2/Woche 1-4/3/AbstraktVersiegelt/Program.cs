@@ -10,27 +10,15 @@ class Program
         // var elektroGeraet = new ElektroGeraet();
 
         // Test abtrakte Methode MessageBeimHochfahren
-        var kuehlschrank = new Kuehlschrank
-        {
-            Marke = "Liebherr ",
-            Modell = "MRFvc 5501",
-            Kuehlvolumen = 544,
-            LeistungInWatt = 120
-        };
 
+        var kuehlschrank = new Kuehlschrank("Liebherr", "MRFvc 5501", 120, 544);
+        Console.WriteLine(kuehlschrank.MomentaneTemperatur);
         Console.WriteLine(kuehlschrank.MessageBeimHochfahren());
+        kuehlschrank.MessageBeimHerunterfahren();
 
 
         // Test abtrakte Methode MessageBeimHochfahren
-        var smartphone = new Smartphone
-        {
-            Marke = "Samsung",
-            Modell = "Galaxy XCover7",
-            AnzahlKameras = 2,
-            HatAkku = true,
-            LeistungInWatt = 6,
-            HatNetzanschluss = false
-        };
+        var smartphone = new Smartphone("Samsung", "Galaxy XCover7", 120);
 
         Console.WriteLine(smartphone.MessageBeimHochfahren());
     }

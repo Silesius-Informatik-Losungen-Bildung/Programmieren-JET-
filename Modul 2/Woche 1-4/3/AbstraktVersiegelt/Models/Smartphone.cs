@@ -1,9 +1,14 @@
-﻿using AbstraktVersiegeltPolymorph.Models.Base;
-
-namespace AbstraktVersiegeltPolymorph.Models
+﻿namespace AbstraktVersiegeltPolymorph.Models
 {
     internal class Smartphone : TragbaresElektroGeraet
     {
+        public Smartphone(string marke, string modell, int leistungInWatt) : base(marke, modell, leistungInWatt)
+        {
+            base.Marke = marke;
+            base.Modell = modell;
+            base.LeistungInWatt = leistungInWatt;
+        }
+
         internal byte AnzahlKameras { get; set; }
 
         public override void FunktionAusfuehren()
