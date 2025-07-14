@@ -6,21 +6,34 @@ class Program
     static void Main(string[] args)
     {
 
+
+        var kuehlschrank = new Kuehlschrank("Liebherr", "MRFvc 5501", 120, 544);
+        var smartphone = new Smartphone("Samsung", "Galaxy XCover7", 120);
+
+        ElektroGeraet[] arr = { kuehlschrank, smartphone };
+
+        
+        foreach(var eg in arr)
+        {
+            eg.MessageBeimHochfahren();
+        }
+
+
         //// folgende Zeile einkommentieren, um zu sehen, dass man abtrakte Klasse ElektroGeraet nicht instaziieren kann.
         // var elektroGeraet = new ElektroGeraet();
 
         // Test abtrakte Methode MessageBeimHochfahren
 
-        var kuehlschrank = new Kuehlschrank("Liebherr", "MRFvc 5501", 120, 544);
-        Console.WriteLine(kuehlschrank.MomentaneTemperatur);
-        Console.WriteLine(kuehlschrank.MessageBeimHochfahren());
-        kuehlschrank.MessageBeimHerunterfahren();
+        //var kuehlschrank = new Kuehlschrank("Liebherr", "MRFvc 5501", 120, 544);
+        ///Console.WriteLine(kuehlschrank.MomentaneTemperatur);
+        //Console.WriteLine(kuehlschrank.MessageBeimHochfahren());
+        //kuehlschrank.MessageBeimHerunterfahren();
 
 
-        // Test abtrakte Methode MessageBeimHochfahren
-        var smartphone = new Smartphone("Samsung", "Galaxy XCover7", 120);
+        //// Test abtrakte Methode MessageBeimHochfahren
+        //var smartphone = new Smartphone("Samsung", "Galaxy XCover7", 120);
 
-        Console.WriteLine(smartphone.MessageBeimHochfahren());
+        //Console.WriteLine(smartphone.MessageBeimHochfahren());
     }
 }
 
