@@ -9,6 +9,7 @@ namespace StatisacheKlassenUndGenersicheMethoden
         {
 
             // Einstellungen
+            
             Console.WriteLine($"Version: {Einstellungen.Anwendungsversion}");
             Console.WriteLine($"Sprache: {Einstellungen.Sprache}");
             Console.WriteLine($"Timeout: {Einstellungen.TimeoutInSekunden} Sekunden");
