@@ -1,95 +1,83 @@
-﻿
+﻿using RecordsDemoApp;
+
 namespace RecordsDemoApp
 {
-    public record Fahrzeug(string Marke, string Modell);
-    public record Auto(string Marke, string Modell, int Baujahr) : Fahrzeug(Marke, Modell);
-    class Program
+    internal class Program
     {
+        // Kurze Syntaxx mit Auto-Init
+        public record Fahrzeug(string Marke, string Modell);
+        public record Auto(string Marke, string Modell, int Baujahr) : Fahrzeug(Marke, Modell);
+
         static void Main(string[] args)
         {
-            // Erstellen von Records
-            var p1 = new Person("Max", "Müller");
-            var p2 = new Person("Max", "Müller");
-            var p3 = new Person("Anna", "Schmidt");
+            // Objekte, die auf Klassen aufbauen vergleichen ihre Adressen im Speicher
 
-            Console.WriteLine("=== ToString() Ausgabe ===");
-            Console.WriteLine(p1); // Automatische Ausgabe: Person { Vorname = Max, Nachname = Müller }
+            var p1 = new PersonClass("Max", 33);
+            var p2 = new PersonClass("Max", 33);
+            var p3 = new PersonClass("Max", 33);
+            var p4 = new PersonClass("Max", 33);
+            var p5 = new PersonClass("Max", 33);
+            var p6 = new PersonClass("Max", 33);
+            var p7 = new PersonClass("Max", 33);
 
-            Console.WriteLine("\n=== Equals / == Vergleich ===");
-            Console.WriteLine($"p1 == p2 ? {p1 == p2}"); // True, da Records Werte vergleichen
-            Console.WriteLine($"p1 == p3 ? {p1 == p3}"); // False
-
-            Console.WriteLine("\n=== Mit with-Expression kopieren ===");
-            var p4 = p1 with { Nachname = "Schneider" };
-            Console.WriteLine(p4); // Person { Vorname = Max, Nachname = Schneider }
-
-            Console.WriteLine("\n=== Unveränderlichkeit ===");
-            //p1.Vorname = "Peter"; // Geht nicht! Records sind immutable, da init-only Properties
-            Console.WriteLine("p1 bleibt unverändert: " + p1);
-
-            
-            // Bsp von Unterricht:
-            var personc1 = new PersonenClass("Max", 33);
-            var personc2 = new PersonenClass("Max", 33);
-
-            var istGleich = personc1 == personc2;
-
-
-            var personr1 = new PersonenRecord("Max", 33);
-            var personr2 = new PersonenRecord("Max", 33);
-            var personr3 = new PersonenRecord("Adam", 33);
-
-            istGleich = personr1 == personr2; // true
+            bool istGleich = p1 == p2;
             Console.WriteLine(istGleich);
-            istGleich = personr1 == personr3; // false
 
-            var recordList = new List<PersonenRecord> { personr1, personr2 };
-            var classList = new List<PersonenClass> { personc1, personc2 };
+            var classList = new List<PersonClass> { p1, p2, p3, p4, p5, p6, p7 };
 
-
-            // Auskommentieren:
-
-            //for (var i = 0; i < recordList.Count; i++)
-            //{
-            //    if (i > 0)
-            //    {
-            //        if (recordList[i] == recordList[i - 1])
-            //            throw new Exception("hab gleiches gefunden");
-            //    }
-            //}
-
-            for (var i = 0; i < classList.Count; i++)
-            {
-                if (i > 0)
-                {
-                    if (classList[i] == classList[i - 1])
-                        throw new Exception("hab gleiches gefunden");
-                }
-            }
-
-            var personX = personr1 with { Name = "Adam" };
+            // Objekte, die auf Records aufbauen vergleichen ihre Inhalte
+            var p1r = new PersonRecord("Max", 33);
+            var p2r = new PersonRecord("Max", 33);
+            var p3r = new PersonRecord("Max", 33);
+            var p4r = new PersonRecord("Adam", 33);
 
 
+            // p1r.Name = "Adam"; unverännderbar!
+            var p1rCopy = p1r with { Name = "Maxima" };
 
-            Fahrzeug fzg = new Auto("VW", "Golf", 2022);
 
-            string info;
+            bool istGleichr = p1r == p2r;
+            Console.WriteLine(istGleichr);
 
-            switch (fzg)
+            var recordList = new List<PersonRecord> { p1r, p2r, p3r, p4r };
+
+            // Iterrieren Sie classList und zählen Sie doppelte Einträge in einer separaten Variable und geben Sie diese aus
+            DopplerCheck(classList);
+
+            // Iterrieren Sie recordList und zählen Sie doppelte Einträge in einer separaten Variable und geben Sie diese aus
+            DopplerCheck(recordList);
+
+
+            Fahrzeug fahrzeug = new Auto("VW", "Golf", 2022);
+
+            switch (fahrzeug)
             {
                 case Auto(var marke, var modell, var baujahr):
-                    info = $"{marke} {modell} ({baujahr})";
+                    Console.WriteLine($"{marke} {modell} ({baujahr})");
                     break;
 
                 case Fahrzeug(var marke, var modell):
-                    info = $"{marke} {modell}";
-                    break;
-
-                default:
-                    info = "Unbekannt";
+                    Console.WriteLine($"{marke} {modell}");
                     break;
             }
-            Console.WriteLine(info); // VW Golf (2022)
+
+            Console.WriteLine(fahrzeug);
+
+        }
+
+        // TODO
+        // Sich die Indexstesllen merken und  ausgeben
+        private static void DopplerCheck<T>(IList<T> list)
+        {
+            var zaehler = 0;
+            for (int i = 0; i < list?.Count; i++)
+            {
+                var item1 = list[i];
+                for (int j = (i + 1); j < list.Count; j++)
+                    if (item1 != null && item1.Equals(list[j]))
+                        zaehler++;
+            }
+            Console.WriteLine(zaehler + " Doppelte gefunden.");
         }
     }
 }

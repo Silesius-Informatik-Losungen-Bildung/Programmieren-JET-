@@ -1,8 +1,8 @@
 ﻿namespace RecordsDemoApp
 {
-    internal record PersonenRecord: MenschRecord
+    internal record PersonRecord: MenschRecord
     {
-        public PersonenRecord(string name, int alter): base(alter)
+        public PersonRecord(string name, int alter): base(alter)
         {
             Name = name;
         }
