@@ -58,12 +58,18 @@
             Console.WriteLine("personenProAlterGruppe");
 
             var personenProAlterGruppe = personen
-                .GroupBy(p => p.Alter)
-                .Select(x => new { Alter = x.Key, Anzahl = x.Count() });
-
+                .GroupBy(p => p.Alter);
+            //.Select(x => new { Alter = x.Key, Anzahl = x.Count() });
 
             foreach (var item in personenProAlterGruppe)
-                Console.WriteLine(item);
+            {
+                Console.Write("Gruppe: " + item.Key + ": ");
+                foreach (var innerItem in item)
+                {
+                    Console.Write(innerItem.Name + ", ");
+                }
+                Console.WriteLine();
+            }
         }
 
         public static void Bestellungen()
@@ -134,8 +140,8 @@
 
             Console.WriteLine("kundenMitBestellungen");
             var kundenMitBestellungen = from kunde in kunden
-                                        join bestellung in bestellungen on kunde.Id
-                                        equals bestellung.KundeId into bestellungenGruppe
+                                        join bestellung in bestellungen on kunde.Id equals bestellung.KundeId
+                                        into bestellungenGruppe
                                         from bestellung in bestellungenGruppe.DefaultIfEmpty() // Entspricht einem LEFT JOIN
                                         select new
                                         {
