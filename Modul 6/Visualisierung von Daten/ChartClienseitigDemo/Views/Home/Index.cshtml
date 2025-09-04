@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Umsatzübersicht";
+}
+
+<h1>Umsatz je Monat</h1>
+
+<div style="max-width:900px">
+    <canvas id="umsatzChart" height="200"></canvas>
+</div>
+
+<p>Datenquelle: <code>/api/umsatzapi</code></p>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+(async function() {
+    const res = await fetch('/api/umsatzapi');
+    const daten = await res.json();
+
+    const labels = daten.map(x => x.monat);
+    const werte  = daten.map(x => x.betrag);
+
+    const ctx = document.getElementById('umsatzChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Umsatz (EUR)',
+                data: werte
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: (value) => new Intl.NumberFormat('de-DE').format(value)
+                    },
+                    title: { display: true, text: 'EUR' }
+                },
+                x: { title: { display: true, text: 'Monat' } }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: { label: (ctx) => ` ${new Intl.NumberFormat('de-DE').format(ctx.parsed.y)} EUR` }
+                }
+            }
+        }
+    });
+})();
+</script>
