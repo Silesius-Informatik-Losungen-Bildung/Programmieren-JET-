@@ -1,6 +1,4 @@
-﻿using RecordsDemoApp;
-
-namespace RecordsDemoApp
+﻿namespace RecordsDemoApp
 {
     internal class Program
     {
@@ -30,7 +28,9 @@ namespace RecordsDemoApp
             var p2r = new PersonRecord("Max", 33);
             var p3r = new PersonRecord("Max", 33);
             var p4r = new PersonRecord("Adam", 33);
-
+            var p5r = new PersonRecord("Adam", 33);
+            var p6r = new PersonRecord("Max", 33);
+            var p7r = new PersonRecord("Adam", 33);
 
             // p1r.Name = "Adam"; unverännderbar!
             var p1rCopy = p1r with { Name = "Maxima" };
@@ -39,7 +39,7 @@ namespace RecordsDemoApp
             bool istGleichr = p1r == p2r;
             Console.WriteLine(istGleichr);
 
-            var recordList = new List<PersonRecord> { p1r, p2r, p3r, p4r };
+            var recordList = new List<PersonRecord> { p1r, p2r, p3r, p4r, p5r, p6r, p7r };
 
             // Iterrieren Sie classList und zählen Sie doppelte Einträge in einer separaten Variable und geben Sie diese aus
             DopplerCheck(classList);
@@ -65,17 +65,23 @@ namespace RecordsDemoApp
 
         }
 
-        // TODO
-        // Sich die Indexstesllen merken und  ausgeben
         private static void DopplerCheck<T>(IList<T> list)
         {
             var zaehler = 0;
+            var besucht = new bool[list.Count];
             for (int i = 0; i < list?.Count; i++)
             {
                 var item1 = list[i];
+
                 for (int j = (i + 1); j < list.Count; j++)
-                    if (item1 != null && item1.Equals(list[j]))
+                {
+                    if (!besucht[j] && item1 != null && item1.Equals(list[j]))
+                    {
                         zaehler++;
+                        besucht[j] = true;
+                        Console.WriteLine(list[i] + " ist an der Index-Stelle " + j + " doppellt.");
+                    }
+                }
             }
             Console.WriteLine(zaehler + " Doppelte gefunden.");
         }
