@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        // Kurze Syntaxx mit Auto-Init
+        // Kurze Syntax mit Auto-Init
         public record Fahrzeug(string Marke, string Modell);
         public record Auto(string Marke, string Modell, int Baujahr) : Fahrzeug(Marke, Modell);
 
@@ -62,7 +62,6 @@
             }
 
             Console.WriteLine(fahrzeug);
-            //---
         }
 
         private static void DopplerCheck<T>(IList<T> list)
