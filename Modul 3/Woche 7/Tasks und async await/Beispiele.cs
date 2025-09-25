@@ -24,6 +24,9 @@ namespace Tasks_und_async_await
            {
                Console.WriteLine("Task startet...");
                Task.Delay(5000).Wait(); // simuliert 5 Sekunden Wartezeit
+               
+               File.WriteAllText("text.txt", "abc");  // wird auch ohne task.Wait() gemacht
+
                Console.WriteLine("Task beendet.");
            });
             task.Wait();
