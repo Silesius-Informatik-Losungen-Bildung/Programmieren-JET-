@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ado.Net", "Ado.Net.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC", "..\EFC\EFC.csproj", "{C46F8CD4-85BF-476D-95B1-29B655DBB49F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC2", "..\EFC2\EFC2.csproj", "{C6C937FF-B0D1-4B3B-A976-33235E16CDF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C46F8CD4-85BF-476D-95B1-29B655DBB49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C46F8CD4-85BF-476D-95B1-29B655DBB49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C46F8CD4-85BF-476D-95B1-29B655DBB49F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C937FF-B0D1-4B3B-A976-33235E16CDF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C937FF-B0D1-4B3B-A976-33235E16CDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C937FF-B0D1-4B3B-A976-33235E16CDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C937FF-B0D1-4B3B-A976-33235E16CDF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

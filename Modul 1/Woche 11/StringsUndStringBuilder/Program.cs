@@ -8,13 +8,8 @@ namespace StringsUndStringBuilder
         static void Main(string[] args)
         {
 
-            string text1 = "Hallo";
-
-            String text2 = "Welt";
-
-
-            string str1 = "Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo";
-            string str2 = "Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo Hallo";
+            string str1 = "Hallo Hallo Hallo";
+            string str2 = str1;
 
             Console.WriteLine(object.ReferenceEquals(str1, str2));
 
@@ -23,10 +18,13 @@ namespace StringsUndStringBuilder
             string y = new string("Hallo".ToCharArray());  // Erzeugt ein neues Objekt
             Console.WriteLine(object.ReferenceEquals(x, y)); // False
 
+
+            // Übungen
+            // Anzahl Wörter
             var satz = "Das ist ein Test";
             int anzhalWoerter = satz.Split(' ').Length;
 
-
+            // Umkehren
             var wort = "otto";
             var chars = wort.ToCharArray();
             Array.Reverse(chars);
@@ -67,6 +65,7 @@ namespace StringsUndStringBuilder
             Console.WriteLine(satz3);
             Console.WriteLine(satz3.Trim());
 
+
             // Substring
             var anzahlAmAnfang = satz2.Substring(satz2.IndexOf("Anzahl"));
             Console.WriteLine(anzahlAmAnfang);
@@ -84,6 +83,7 @@ namespace StringsUndStringBuilder
             //Console.WriteLine(mitIndex2);
 
 
+            // String vs. StringBuilder 
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("Schreibe ");
@@ -99,11 +99,9 @@ namespace StringsUndStringBuilder
             Console.WriteLine(stringBuilder.ToString());
 
 
+            // Performance-Test mit String addieren
             var count2 = 100000;
-
-
             string result = "";
-            
             Stopwatch sw = new Stopwatch();
             sw.Start();
             for (int i = 0; i < count2; i++)
@@ -115,7 +113,7 @@ namespace StringsUndStringBuilder
             Console.WriteLine(sw.ElapsedMilliseconds + " Millisekunden mit String");
 
 
-
+            // Performance-Test mit Addieren von Wörtern mit  StringBuilder
             var sb = new StringBuilder();
 
             Stopwatch sw2 = new Stopwatch();
