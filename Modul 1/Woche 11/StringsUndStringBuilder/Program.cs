@@ -9,7 +9,7 @@ namespace StringsUndStringBuilder
         {
 
             string str1 = "Hallo Hallo Hallo";
-            string str2 = str1;
+            string str2 = "Hallo Hallo Hallo";
 
             Console.WriteLine(object.ReferenceEquals(str1, str2));
 
@@ -19,7 +19,7 @@ namespace StringsUndStringBuilder
             Console.WriteLine(object.ReferenceEquals(x, y)); // False
 
 
-            // Übungen
+
             // Anzahl Wörter
             var satz = "Das ist ein Test";
             int anzhalWoerter = satz.Split(' ').Length;
