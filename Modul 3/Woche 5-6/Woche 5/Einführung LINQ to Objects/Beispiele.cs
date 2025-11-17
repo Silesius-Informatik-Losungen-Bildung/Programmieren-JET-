@@ -50,20 +50,20 @@ namespace Einführung_Linq_to_Objects
             var namen = new List<string>() { "Anna", "Roman", "Tobias", "Matthias" };
            
             // Definition der Linq-Abfrage
-            var result = from name in namen
+            var query = from name in namen
                          where name.Contains("ias")
                          select name;
 
             // Erst hier wird die Linq-Abfrage ausgeführt
-            foreach (var item in result)
+            foreach (var item in query)
                 Console.WriteLine(item);
         }
 
         public static void FilterMitListUndLinq()
         {
             var namen = new List<string>() { "Anna", "Roman", "Tobias", "Matthias" };
-            var result = namen.Where(name => name.Contains("ias"));
-            foreach (var item in result)
+            var query = namen.Where(name => name.EndsWith("ias"));
+            foreach (var item in query)
                 Console.WriteLine(item);
         }
 
@@ -147,13 +147,12 @@ namespace Einführung_Linq_to_Objects
         public static void AnonymeObjekteBsp2()
         {
             var personen = new List<string> { "Anna", "Bernd", "Clemens", "Diana" };
-            var ergebnis = from name in personen
-                           where name.StartsWith("A")
-                           select new { Name = name, Laenge = name.Length };
+            var query = personen.Where(p => p.StartsWith("A"))
+                .Select(name => new { Name = name, Länge = name.Length });
 
-            foreach (var person in ergebnis)
+            foreach (var person in query)
             {
-                Console.WriteLine($"Name: {person.Name}, Länge: {person.Laenge}");
+                Console.WriteLine($"Name: {person.Name}, Länge: {person.Länge}");
             }
         }
 
@@ -293,7 +292,7 @@ namespace Einführung_Linq_to_Objects
                 var any = namen.Any(name => name == "Lukas" || name == "Anna");
                 Console.WriteLine(any);
 
-                var personen = new List<Person> { new() { Alter = 45, Name = "Name1" }, new() { Age = 34, Name = "Name2" }, new() { Age = 34, Name = "Alex" } };
+                var personen = new List<Person> { new() { Alter = 45, Name = "Name1" }, new() { Alter = 34, Name = "Name2" }, new() { Alter = 34, Name = "Alex" } };
 
                 var jüngste = personen.Min(person => person.Alter);
                 Console.WriteLine(jüngste);
