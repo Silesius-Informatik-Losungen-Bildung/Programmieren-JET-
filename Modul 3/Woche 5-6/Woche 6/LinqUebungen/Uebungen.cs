@@ -1,4 +1,6 @@
-﻿namespace LinqUebungen
+﻿using System.Collections.Generic;
+
+namespace LinqUebungen
 {
     public static class Uebungen
     {
@@ -129,7 +131,7 @@
                 new()  { Id = 4, Name = "Krawietz" }
             };
 
-            Console.WriteLine("fuerJedeBesetllungDenKunden");
+            Console.WriteLine("fuerJedeBesetllungDenKunden V1"); // Inner Join Query-Syntax
             var fuerJedeBesetllungDenKunden =
                 from bestellung in bestellungen
                 join kunde in kunden on bestellung.KundeId equals kunde.Id
@@ -138,19 +140,55 @@
             foreach (var item in fuerJedeBesetllungDenKunden)
                 Console.WriteLine(item);
 
-            Console.WriteLine("kundenMitBestellungen");
-            var kundenMitBestellungen = from kunde in kunden
-                                        join bestellung in bestellungen on kunde.Id equals bestellung.KundeId
-                                        into bestellungenGruppe
-                                        from bestellung in bestellungenGruppe.DefaultIfEmpty() // Entspricht einem LEFT JOIN
-                                        select new
-                                        {
-                                            kunde.Name,
-                                            Produkt = bestellung?.Produkt ?? "Keine Bestellung"
-                                        };
 
-            foreach (var item in kundenMitBestellungen)
+            Console.WriteLine("fuerJedeBesetllungDenKunden V2"); // Inner Join Methoden-Syntax
+            var fuerJedeBesetllungDenKunden2 = bestellungen
+                .Join(
+                    kunden, // Joine mit List kunden
+                    bestellung => bestellung.KundeId, // verbinde KundeId von Bestellung...
+                    kunde => kunde.Id,  // ... mit Id von kunden
+                    (bestellung, kunde) => new { bestellung.Produkt, kunde.Name } // anonymes Objekt für Ausgabe
+                );
+
+            foreach (var item in fuerJedeBesetllungDenKunden2)
                 Console.WriteLine(item);
+
+
+
+            Console.WriteLine("kundenMitBestellungen V1"); // Left Join Query-Syntax
+            var kundenMitBestellungen1 = from kunde in kunden
+                                         join bestellung in bestellungen on kunde.Id equals bestellung.KundeId
+                                         into bestellungenGruppe
+                                         from bestellung in bestellungenGruppe.DefaultIfEmpty() // Entspricht einem LEFT JOIN
+                                         select new
+                                         {
+                                             kunde.Name,
+                                             Produkt = bestellung?.Produkt ?? "Keine Bestellung"
+                                         };
+
+            foreach (var item in kundenMitBestellungen1)
+                Console.WriteLine(item);
+
+
+            var kundenMitBestellungen2 = kunden  // Left Join Methoden-Syntax
+                .GroupJoin(
+                    bestellungen,
+                    kunde => kunde.Id,
+                    bestellung => bestellung.KundeId,
+                    (kunde, bestellungenGruppe) => new { kunde, bestellungenGruppe }
+                )
+                .SelectMany(
+                    x => x.bestellungenGruppe.DefaultIfEmpty(),
+                    (x, bestellung) => new
+                    {
+                        x.kunde.Name,
+                        Produkt = bestellung?.Produkt ?? "Keine Bestellung"
+                    }
+                );
+
+            foreach (var item in kundenMitBestellungen2)
+                Console.WriteLine(item);
+        
         }
 
         public static void ZeichenKetten()
@@ -197,11 +235,14 @@
                 Console.WriteLine(item.Datum + ": " + item.Beschreibung);
 
             Console.WriteLine("dasFruehersteErreichnis");
+
             var dasFruehersteErreichnis = ereignisse.OrderBy(e => e.Datum).First();
+            // var dasFruehersteErreichnisV2 = ereignisse.Min(e => e.Datum);
+
             Console.WriteLine(dasFruehersteErreichnis.Datum + ": " + dasFruehersteErreichnis.Beschreibung);
 
             Console.WriteLine("nachDatumAbsteigend");
-            var nachDatumAbsteigend = ereignisse.OrderByDescending(e => e.Datum);
+            var nachDatumAbsteigend = ereignisse.OrderByDescending(e => e.Beschreibung);
             foreach (var item in nachDatumAbsteigend)
                 Console.WriteLine(item.Datum + ": " + item.Beschreibung);
 
@@ -293,27 +334,61 @@
                  new() { Id = 104, KundeId = 3, Betrag = 50 }
             };
 
-            Console.WriteLine("alleBestellungenMitKundennamen");
-            var alleBestellungenMitKundennamen = from b in bestellungen
+            Console.WriteLine("alleBestellungenMitKundennamen V1"); // Query-Syntax
+            var alleBestellungenMitKundennamen1 = from b in bestellungen
                                                  join k in kunden on b.KundeId equals k.Id
                                                  select new { b.Id, k.Name, b.Betrag };
 
-            foreach (var item in alleBestellungenMitKundennamen)
+            foreach (var item in alleBestellungenMitKundennamen1)
                 Console.WriteLine(item);
 
-            Console.WriteLine("alleKundenMitBestellungenMitLefJoin");
-            var alleKundenMitBestellungenMitLefJoin = from k in kunden
+            Console.WriteLine("alleBestellungenMitKundennamen V2"); // Methoden-Syntax
+
+            var alleBestellungenMitKundennamen2 = bestellungen
+                .Join(
+                    kunden,
+                    b => b.KundeId,
+                    k => k.Id,
+                    (b, k) => new { b.Id, k.Name, b.Betrag }
+                );
+
+            foreach (var item in alleBestellungenMitKundennamen2)
+                Console.WriteLine(item);
+
+
+            Console.WriteLine("alleKundenMitBestellungenMitLefJoin"); // Query-Syntax
+            var alleKundenMitBestellungenMitLefJoin1 = from k in kunden
                                                       join b in bestellungen on k.Id equals b.KundeId into bestellungenVonKunde
                                                       from b in bestellungenVonKunde.DefaultIfEmpty()
                                                       select new { k.Name, BestellungId = b?.Id, Betrag = b?.Betrag ?? 0 };
 
-            foreach (var item in alleKundenMitBestellungenMitLefJoin)
+            foreach (var item in alleKundenMitBestellungenMitLefJoin1)
             {
                 Console.WriteLine(item);
             }
 
-            Console.WriteLine("kundeHechstenGesamtsumme");
-            var kundeHechstenGesamtsumme =
+            Console.WriteLine("alleKundenMitBestellungenMitLefJoin");
+            
+            var alleKundenMitBestellugenV2 = kunden
+                .GroupJoin(
+                    bestellungen,
+                    k => k.Id,
+                    b => b.KundeId,
+                    (k, bestellungenVonKunde) => new { k, bestellungenVonKunde }
+                )
+                .SelectMany(gruppe => gruppe.bestellungenVonKunde.DefaultIfEmpty(), (gruppe, b) => new { gruppe.k.Name }
+                );
+
+            foreach (var item in alleKundenMitBestellugenV2)
+                Console.WriteLine(item);
+
+            foreach (var item in alleKundenMitBestellugenV2)
+                Console.WriteLine(item);
+
+
+
+            Console.WriteLine("kundeHechstenGesamtsumme"); // Query-Syntax
+            var kundeHechstenGesamtsumme1 =
                 (from b in bestellungen
                  group b by b.KundeId into gruppe
                  select new
@@ -324,23 +399,88 @@
                 .OrderByDescending(x => x.Summe)
                 .FirstOrDefault();
 
-            if (kundeHechstenGesamtsumme != null)
+            if (kundeHechstenGesamtsumme1 != null)
             {
-                var kundeMitHöchsterSumme = kunden.FirstOrDefault(k => k.Id == kundeHechstenGesamtsumme.KundeId);
+                var kundeMitHöchsterSumme = kunden.FirstOrDefault(k => k.Id == kundeHechstenGesamtsumme1.KundeId);
                 Console.WriteLine(kundeMitHöchsterSumme.Name);
             }
+
+            Console.WriteLine("kundeHechstenGesamtsumme");  // Methoden-Syntax
+
+            var kundeHechstenGesamtsumme2 = bestellungen
+                .GroupBy(b => b.KundeId)
+                .Select(gruppe => new
+                {
+                    KundeId = gruppe.Key,
+                    Summe = gruppe.Sum(b => b.Betrag)
+                })
+                .OrderByDescending(x => x.Summe)
+                .FirstOrDefault();
+
+            if (kundeHechstenGesamtsumme2 != null)
+            {
+                var kundeMitHöchsterSumme = kunden.FirstOrDefault(k => k.Id == kundeHechstenGesamtsumme2.KundeId);
+                Console.WriteLine(kundeMitHöchsterSumme.Name);
+            }
+
         }
 
         public static void VerschachtelteObjekte()
         {
             var kurse = new List<Kurs>
             {
-               new() { Titel = "C# Grundlagen", Teilnehmer = new()  { new() { Name = "Lisa" }, new() { Name = "Markus" } } },
-               new() { Titel = "Datenbanken", Teilnehmer = new()  { new() { Name = "Markus" }, new() { Name = "Tom" } } },
-               new() { Titel = "Webentwicklung", Teilnehmer = new()  { new() { Name = "Anna" }, new() { Name = "Lisa" } } }
+                new Kurs
+                {
+                    Titel = "C# Grundlagen",
+                    Teilnehmer = new List<Teilnehmer>
+                    {
+                        new Teilnehmer
+                        {
+                            Name = "Lisa"
+                        },
+                        new Teilnehmer
+                        {
+                            Name = "Markus"
+                        }
+                    }
+                },
+                new Kurs
+                {
+                    Titel = "Datenbanken",
+                    Teilnehmer = new List<Teilnehmer>
+                    {
+                        new Teilnehmer
+                        {
+                            Name = "Markus"
+                        },
+                        new Teilnehmer
+                        {
+                            Name = "Tom"
+                        }
+                    }
+                },
+                new Kurs
+                {
+                    Titel = "Webentwicklung",
+                    Teilnehmer = new List<Teilnehmer>
+                    {
+                        new Teilnehmer
+                        {
+                            Name = "Anna"
+                        },
+                        new Teilnehmer
+                        {
+                            Name = "Lisa"
+                        }
+                    }
+                },
+
             };
 
             Console.WriteLine("alleTeilnehmerAlleKurseOhneDuplikate");
+            // Wenn man SelectMany benutzt,
+            // werden alle Elemente aller inneren Listen in eine einzige Liste herausgezogen, also:
+            // ["Lisa", "Markus", "Markus", "Tom", "Anna", "Lisa"]
             var alleTeilnehmerAlleKurseOhneDuplikate = kurse
                 .SelectMany(k => k.Teilnehmer)
                 .Select(t => t.Name)
