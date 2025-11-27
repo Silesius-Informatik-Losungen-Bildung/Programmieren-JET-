@@ -18,35 +18,39 @@ namespace Tasks_und_async_await
             Console.WriteLine("Daten wurden geladen.");
         }
 
-        public static void EinfachesTaskBeispiel()
+        public static async Task EinfachesTaskBeispielAsync()
         {
-            Task task = Task.Run(() =>
-           {
-               Console.WriteLine("Task startet...");
-               Task.Delay(5000).Wait(); // simuliert 5 Sekunden Wartezeit
-               
-               File.WriteAllText("text.txt", "abc");  // wird auch ohne task.Wait() gemacht
+            // Gibt sofort eine Ausgabe im Hauptthread aus
+            Console.WriteLine("Synchrome Zeile 1...");
 
-               Console.WriteLine("Task beendet.");
-           });
-            task.Wait();
+            // Startet einen neuen Task im ThreadPool
+            // Der Lambda-Ausdruck ist async, daher kann darin await verwendet werden
+            await Task.Run(async () =>
+            {
+                // Wird im Hintergrund-Thread ausgeführt
+                Console.WriteLine("Task startet...");
+
+                // Asynchrone, nicht blockierende Pause von 5 Sekunden
+                // Der Thread bleibt in dieser Zeit frei für andere Aufgaben
+                await Task.Delay(5000);
+
+                // Wird nach Ablauf der Wartezeit ausgeführt
+                Console.WriteLine("Task beendet.");
+            });
+
+            // Diese Zeile wird erst ausgeführt, nachdem der Task beendet wurde
+            Console.WriteLine("Synchrome Zeile 2...");
         }
 
         public static Task<int> BerechneAsync()
         {
-            return BerechneAsync();
-
-            Task<int> BerechneAsync()
+            var task = Task.Run(() =>
             {
-                return Task.Run(() =>
-                {
-                    Thread.Sleep(2000); // Simuliert eine Berechnung
-                    return 42; // Gibt ein Ergebnis zurück
-                });
-            }
+                Thread.Sleep(2000); // Simuliert eine Berechnung
+                return 42; // Gibt ein Ergebnis zurück
+            });
+            return task;
         }
-
-
 
 
         public static async Task EinfachesTaskBeispielASync()
@@ -82,18 +86,30 @@ namespace Tasks_und_async_await
 
         public static async Task MehrereTaksASync()
         {
-            // Komplexeres Beispiel: Mehrere Tasks gleichzeitig ASYNC
+            // Startet drei asynchrone Tasks gleichzeitig
             Task t1 = WarteAsync("Task 1", 2000);
             Task t2 = WarteAsync("Task 2", 4000);
             Task t3 = WarteAsync("Task 3", 1000);
 
+            // Wartet asynchron, bis ALLE drei Tasks abgeschlossen sind
+            // Der aufrufende Thread wird dabei NICHT blockiert
             await Task.WhenAll(t1, t2, t3);
+
+            // Wird erst ausgegeben, wenn t1, t2 und t3 beendet sind
             Console.WriteLine("Alle Tasks beendet.");
 
+
+            // Asynchrone Methode, die einen Task zurückliefert
             static async Task WarteAsync(string name, int millisekunden)
             {
+                // Ausgabe zum Start des Tasks
                 Console.WriteLine($"{name} startet");
+
+                // Asynchrone Wartezeit (nicht blockierend)
+                // Der Thread bleibt frei für andere Aufgaben
                 await Task.Delay(millisekunden);
+
+                // Ausgabe nach Ablauf der Wartezeit
                 Console.WriteLine($"{name} beendet");
             }
         }
