@@ -10,5 +10,6 @@ using Tasks_und_async_await;
 //await Beispiele.MehrereTaksASync();
 //await Beispiele.FrühstückAsync();
 
-await Beispiele.BildDownLoader();
+await Beispiele.MachAllesAsync();
+//await Beispiele.BildDownLoader();
 

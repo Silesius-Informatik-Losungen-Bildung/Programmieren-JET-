@@ -114,6 +114,43 @@ namespace Tasks_und_async_await
             }
         }
 
+        public static async Task MachAllesAsync()
+        {
+            GebeMessageAus();
+
+            var istOk = await Schreibe5000DatensätzeInDbAsync();
+            Console.WriteLine(istOk);
+
+            var temparatur = await HoleTemperaturVonWetterDienstAsync();
+            Console.WriteLine(temparatur);
+
+            SageAufwiederschaun();
+
+            async Task<bool> Schreibe5000DatensätzeInDbAsync()
+            {
+                Console.WriteLine("Schreibe 5.0000 Datensätze in Db und blockiere niemanden....");
+                await Task.Delay(2000);
+                return true;
+            }
+
+            void GebeMessageAus()
+            {
+                Console.WriteLine("Willkommen hier");
+            }
+
+            async Task<double> HoleTemperaturVonWetterDienstAsync()
+            {
+                Console.WriteLine("Hole Lufttemperatur und blockiere niemanden....");
+                await Task.Delay(2000);
+                return 15.5;
+            }
+
+            void SageAufwiederschaun()
+            {
+                Console.WriteLine("Aufwiederschaun");
+            }
+        }
+
         public static async Task FrühstückAsync()
         {
             Console.WriteLine("Frühstücksvorbereitung gestartet...");
