@@ -121,8 +121,8 @@ namespace Tasks_und_async_await
             var istOk = await Schreibe5000DatensätzeInDbAsync();
             Console.WriteLine(istOk);
 
-            var temparatur = await HoleTemperaturVonWetterDienstAsync();
-            Console.WriteLine(temparatur);
+            var temperatur = await HoleTemperaturVonWetterDienstAsync();
+            Console.WriteLine(temperatur);
 
             SageAufwiederschaun();
 
