@@ -8,8 +8,9 @@ using Tasks_und_async_await;
 //await Beispiele.EinfachesTaskBeispielASync();
 //Beispiele.MehrereAufgabenSync();
 //await Beispiele.MehrereTaksASync();
-//await Beispiele.FrühstückAsync();
+await Beispiele.FrühstückParallelAsync();
 
-await Beispiele.MachAllesAsync();
-//await Beispiele.BildDownLoader();
+//Beispiele.MachAlles();
+//await Beispiele.MachAllesAsync();
+//await Beispiele.BildDownLoaderParallelAsync();
 

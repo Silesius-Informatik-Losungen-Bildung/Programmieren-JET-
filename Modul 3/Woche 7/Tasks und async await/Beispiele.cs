@@ -87,13 +87,13 @@ namespace Tasks_und_async_await
         public static async Task MehrereTaksASync()
         {
             // Startet drei asynchrone Tasks gleichzeitig
-            Task t1 = WarteAsync("Task 1", 2000);
-            Task t2 = WarteAsync("Task 2", 4000);
-            Task t3 = WarteAsync("Task 3", 1000);
+            Task task1 = WarteAsync("Task 1", 2000);
+            Task task2 = WarteAsync("Task 2", 4000);
+            Task task3 = WarteAsync("Task 3", 1000);
 
             // Wartet asynchron, bis ALLE drei Tasks abgeschlossen sind
             // Der aufrufende Thread wird dabei NICHT blockiert
-            await Task.WhenAll(t1, t2, t3);
+            await Task.WhenAll(task1, task2, task3);
 
             // Wird erst ausgegeben, wenn t1, t2 und t3 beendet sind
             Console.WriteLine("Alle Tasks beendet.");
@@ -114,18 +114,76 @@ namespace Tasks_und_async_await
             }
         }
 
-        public static async Task MachAllesAsync()
+        public static void MachAlles()
         {
+            // Schritt 1: Sync im Haupt-Thread (blockierend)
             GebeMessageAus();
 
-            var istOk = await Schreibe5000DatensätzeInDbAsync();
+            // Schritt 2: Sync im Haupt-Thread (blockierend)
+            var istOk = Schreibe5000DatensätzeInDb();
+
+            // Schritt 3: Sync im Haupt-Thread
             Console.WriteLine(istOk);
 
-            var temperatur = await HoleTemperaturVonWetterDienstAsync();
+            // Schritt 4: Sync im Haupt-Thread (blockierend)
+            var temperatur = HoleTemperaturVonWetterDienst();
+
+            // Schritt 5: Sync im Haupt-Thread (blockierend)
             Console.WriteLine(temperatur);
 
+            // Schritt 6: Sync im Haupt-Thread (blockierend)
             SageAufwiederschaun();
 
+
+            // Die Methoden
+            bool Schreibe5000DatensätzeInDb()
+            {
+                Console.WriteLine("Schreibe 5.000 Datensätze in Db und blockiere den Thread...");
+                Thread.Sleep(2000);
+                return true;
+            }
+
+            void GebeMessageAus()
+            {
+                Console.WriteLine("Willkommen hier");
+            }
+
+            double HoleTemperaturVonWetterDienst()
+            {
+                Console.WriteLine("Hole Lufttemperatur und blockiere den Thread...");
+                Thread.Sleep(2000);
+                return 15.5;
+            }
+
+            void SageAufwiederschaun()
+            {
+                Console.WriteLine("Aufwiederschaun");
+            }
+        }
+
+
+        public static async Task MachAllesAsync()
+        {
+            // Shcritt 1: Sync blockierend im Haupt-Thread
+            GebeMessageAus();
+
+            // Schritt 2: Ayync in neuem Thread / =blockiert nicht den Haupt-Thread
+            var istOk = await Schreibe5000DatensätzeInDbAsync();
+
+            // Schritt 3: Sync blockierend im Haupt-Thread
+            Console.WriteLine(istOk);
+
+            // Schritt 4: Async in neuem Thread / =blockiert nicht den Haupt-Thread
+            var temperatur = await HoleTemperaturVonWetterDienstAsync();
+
+            // Shcritt 5: Sync blockierend im Haupt-Thread
+            Console.WriteLine(temperatur);
+
+            // Schritt 6: Sync blockierend im Haupt-Thread
+            SageAufwiederschaun();
+
+
+            // Die Methoden
             async Task<bool> Schreibe5000DatensätzeInDbAsync()
             {
                 Console.WriteLine("Schreibe 5.0000 Datensätze in Db und blockiere niemanden....");
@@ -151,11 +209,11 @@ namespace Tasks_und_async_await
             }
         }
 
-        public static async Task FrühstückAsync()
+        public static async Task FrühstückParallelAsync()
         {
             Console.WriteLine("Frühstücksvorbereitung gestartet...");
 
-            // Starten der Aufgaben gleichzeitig
+            // Starten der Aufgaben "gleichzeitig"
             Task kaffeeTask = KaffeeKochenAsync();
             Task eierTask = EierspeiseMachenAsync();
             Task toastTask = ToastToastenAsync();
@@ -187,7 +245,7 @@ namespace Tasks_und_async_await
                 Console.WriteLine("Toast ist fertig!");
             }
         }
-        public static async Task BildDownLoader()
+        public static async Task BildDownLoaderParallelAsync()
         {
             List<string> urls = new()
                     {
