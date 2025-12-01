@@ -247,58 +247,58 @@ namespace Tasks_und_async_await
         }
         public static async Task BildDownLoaderParallelAsync()
         {
-            List<string> urls = new()
+            List<string> urls = new List<string>
                     {
                         "https://upload.wikimedia.org/wikipedia/commons/5/52/Bee_on_Echinacea.jpg",
                         "https://upload.wikimedia.org/wikipedia/commons/d/df/Eiche_auf_der_Pfaueninsel.jpg",
-                        "https://upload.wikimedia.org/wikipedia/commons/2/20/Odenthal_Ortszentrum_Pfarrhaus.jpg"
+                        "https://upload.wikimedia.org/wikipedia/commons/2/20/Odenthal_Ortszentrum_Pfarrhaus.jpg",
+                        "https://wallpapercave.com/wp/wp3250252.jpg"
+
                     };
-
             Console.WriteLine("Starte Webanfragen...");
-            Stopwatch stopwatch = Stopwatch.StartNew();
 
-            // Starte alle Anfragen gleichzeitig
+            // Stoppuhr starten
+            var mainStopwatch = Stopwatch.StartNew();
+
             var tasks = new List<Task<long>>();
-
-            for (int i = 0; i < urls.Count; i++)
+            foreach (var url in urls)
             {
-                string? url = urls[i];
-                tasks.Add(MesseAntwortzeit(url, i));
+                // Tasks (= Aufrufe von Download-Methode) in Liste hinzufügen
+                tasks.Add(Download(url));
             }
-
-            // Warten auf alle Anfragen
+            // Warten auf alle Anfragen und Messzeit als Rückgabe zurück bekommen
             long[] antwortzeiten = await Task.WhenAll(tasks);
 
-            stopwatch.Stop();
-            Console.WriteLine($"Alle Anfragen abgeschlossen in {stopwatch.ElapsedMilliseconds} ms\n");
+            mainStopwatch.Stop();
 
-            // Ergebnisse ausgeben
             for (int i = 0; i < urls.Count; i++)
-            {
-                Console.WriteLine($"Antwortzeit für {urls[i]}: {antwortzeiten[i]} ms");
-            }
+                Console.WriteLine($"Antwortzeit für {GetBildname(urls[i])}: {antwortzeiten[i]} ms");
 
-            static async Task<long> MesseAntwortzeit(string url, int i)
+            Console.WriteLine($"Alle Anfragen abgeschlossen in {mainStopwatch.ElapsedMilliseconds} ms");
+
+            static async Task<long> Download(string url)
             {
+                // instanziere einen virtullen "Browser", der sich mit using selbst aus dem Speicher entferrnt
                 using var httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
+                // Header UserAgent hinzufügen, um menschlichen User zu emulieren
+                httpClient.DefaultRequestHeaders
+                    .UserAgent
+                    .ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36");
+
                 var stopwatch = Stopwatch.StartNew();
-
-                try
-                {
-                    byte[] imageBytes = await httpClient.GetByteArrayAsync(url);
-                    // Speichern des Bildes auf der Festplatte
-                    await File.WriteAllBytesAsync("Bild_" + i + ".jpg", imageBytes);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Fehler bei {url}: {ex.Message}");
-                    return -1; // Fehlercode
-                }
-
+                // Binäre Datei ist in C# als Byte-Array abbildbar
+                byte[] bild = await httpClient.GetByteArrayAsync(url);
                 stopwatch.Stop();
-                return stopwatch.ElapsedMilliseconds;
+
+                var gesamtZeit = stopwatch.ElapsedMilliseconds;
+
+                // Blockiere den Haupt-Thrad nicht und schreibe die Datei in separatem Task
+                await File.WriteAllBytesAsync(GetBildname(url), bild);
+
+                return gesamtZeit;
             }
+
+            static string GetBildname(string url) => url.Split('/').Last();
         }
     }
 }
