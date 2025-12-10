@@ -12,27 +12,35 @@ namespace EFCNorthwindUebungen.Repository
         {
             using (context = new EfcnorthwindContext())
             {
-                var category = context.Categories
-                    .FirstOrDefault(c => c.CategoryName == "Beverages");
+                var category = context.Categories.FirstOrDefault(c => c.CategoryName == "           ");
 
+                // Erstelle neues Produkt im Speicher 
                 var product = new Product
                 {
                     ProductName = "Testprodukt",
                     UnitPrice = 9.99m,
-                    CategoryId = category.CategoryId,
+                    Category = category,
                     Discontinued = false
                 };
 
+                // Gebe Status von product aus (Detached = keine Änderungen an Objekt erkannt)
                 CheckStatus(product);
 
+                // Produkt im Speicher in Products-DbSet hizufügen
                 context.Products.Add(product);
+                // Gebe Status von product aus (Added = Objekt hinzugefügt)
                 CheckStatus(product);
 
+                // Überschreibe produkt im Speicher mit einen anderen Produkt
                 product = context.Products.FirstOrDefault(p => p.ProductName == "Chai");
                 product.ProductName = "XXXX";
+
+                // Gebe Status von product aus (Modiefied = Objekt geändert)
                 CheckStatus(product);
 
+                // Lösche product aus DbSet
                 context.Products.Remove(product);
+                // Gebe Status von product aus (Deleted = Objekt gelöscht)
                 CheckStatus(product);
 
                 //context.SaveChanges();
@@ -50,14 +58,13 @@ namespace EFCNorthwindUebungen.Repository
             using var context = new EfcnorthwindContext();
 
             // Zwei neue Beispielprodukte anlegen
-            var category = context.Categories
-                .FirstOrDefault(c => c.CategoryName == "Beverages");
+            var category = context.Categories.FirstOrDefault(c => c.CategoryName == "Beverages");
             var name1 = Guid.NewGuid().ToString();
             var p1 = new Product
             {
                 ProductName = name1,
                 UnitPrice = 9.99m,
-                CategoryId = category.CategoryId,
+                Category = category,
                 Discontinued = false
             };
             context.Products.Add(p1);
@@ -76,13 +83,10 @@ namespace EFCNorthwindUebungen.Repository
             //----------------------------------------------
 
             // Produkt MIT Tracking aus DB holen
-            var produktTracked = context.Products
-                 .FirstOrDefault(p => p.ProductName == name1);
+            var produktTracked = context.Products.FirstOrDefault(p => p.ProductName == name1);
 
             // Produkt OHNE Tracking aus DB holen
-            var produktUntracked = context.Products
-                .AsNoTracking()
-                .FirstOrDefault(p => p.ProductName == name2);
+            var produktUntracked = context.Products.AsNoTracking().FirstOrDefault(p => p.ProductName == name2);
 
             // Änderungen vorhemen
             produktTracked.ProductName = "Geändert mit Tracking";
