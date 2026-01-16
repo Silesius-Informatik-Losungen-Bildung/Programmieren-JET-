@@ -6,7 +6,7 @@
         {
             MemoryStreamBeispiel.Bsp();
             FileStreamBeispiel.Bsp();
-            BinaryStreamBeispiel.Bsp();
+            FileStreamBinaer.Bsp();
 
             Uebungen.Uebung1();
             Uebungen.Uebung2();
