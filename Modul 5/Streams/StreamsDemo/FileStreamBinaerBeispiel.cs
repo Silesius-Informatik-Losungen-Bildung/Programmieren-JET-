@@ -1,5 +1,5 @@
 namespace StreamsDemo;
-internal class FileStreamBinaer
+internal class FileStreamBinaerBeispiel
 {
     internal static void Bsp()
     {
