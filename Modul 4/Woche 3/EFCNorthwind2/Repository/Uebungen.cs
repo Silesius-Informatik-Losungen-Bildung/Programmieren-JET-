@@ -2,7 +2,7 @@
 using EFCNorthwind2.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFCNorthwindUebungen.Repository
+namespace EFCNorthwind2.Repository
 {
     internal class Uebungen
     {

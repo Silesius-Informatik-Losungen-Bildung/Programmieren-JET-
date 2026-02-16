@@ -1,6 +1,4 @@
-﻿using EFCNorthwindUebungen.Repository;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
+﻿using EFCNorthwind2.Repository;
 
 namespace EFCNorthwind2
 {
